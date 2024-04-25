@@ -1,0 +1,64 @@
+@media screen and (max-width: 1440px) {
+  body {
+    /* background-image: url(../img/Homepage_desk.jpg);
+    background-size: 1440px 1395px; */
+    background-image: url(../images/P-P.webp);
+    background-size: 1440px 1024px;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+
+  main {
+    opacity: 0.5;
+    color: blue;
+  }
+}
+
+@media screen and (max-width: 1438px) {
+  body {
+    background-image: url(../img/Homepage_desk);
+    background-image: url(../img/Menu\ La\ palette\ du\ gout_desk.jpg);
+  }
+  .wrapper {
+    opacity: 1;
+    color: black;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .wrapper {
+    opacity: 0.5;
+    color: blue;
+  }
+  body {
+    /* background-image: url(../img/Homepage_mobile.jpg);
+    background-size: 375px 2263px; */
+    background-image: url(../img/Menu\ -\ La\ palette\ du\ goût_mobile.jpg);
+    background-size: 375px 1593px;
+  }
+}
+
+@media screen and (max-width: 373px) {
+  body {
+    max-width: 374px;
+    /* background-image: url(../img/Homepage_mobile); */
+    background-image: url(../img/Menu\ -\ La\ palette\ du\ goût_mobile);
+  }
+
+  .wrapper {
+    opacity: 1;
+    color: black;
+  }
+}
+.margin .card_restaurants:nth-child(1) {
+  background-image: url(../img/restaurants/jay-wennington-N_Y88TWmGwA-unsplash.jpg);
+}
+.margin .card_restaurants:nth-child(2) {
+  background-image: url(../img/restaurants/stil-u2Lp8tXIcjw-unsplash.jpg);
+}
+.margin .card_restaurants:nth-child(3) {
+  background-image: url(../img/restaurants/toa-heftiba-DQKerTsQwi0-unsplash.jpg);
+}
+.margin .card_restaurants:nth-child(4) {
+  background-image: url(../img/restaurants/louis-hansel-shotsoflouis-qNBGVyOCY8Q-unsplash.jpg);
+}

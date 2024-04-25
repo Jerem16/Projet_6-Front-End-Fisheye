@@ -1,0 +1,62 @@
+.photograph-header {
+    background-color: #fafafa;
+    height: 310px;
+    margin: 20px 100px 50px 100px;
+    padding: 15px 50px;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.photograph-info {
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 0 25px 0;
+    width: 358px;
+    display: flex;
+    flex-flow: column;
+}
+.title-name {
+    color: #d3573c;
+    font-size: 64px;
+    margin: 0 0 12px 0;
+    line-height: 64px;
+}
+.title-location {
+    color: #901c1c;
+    font-size: 24px;
+    margin: 0;
+    padding-left: 2px;
+}
+.title-slogan {
+    color: #525252;
+    font-size: 18px;
+    padding-left: 2px;
+}
+.contact_button {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901c1c;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.photograph-header .image-container {
+    width: 200px;
+    height: 200px;
+    margin-left: 158px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 30px;
+}
+.photograph-header .image-container img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}

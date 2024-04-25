@@ -1,31 +1,28 @@
-async function getPhotographers() {
-    try {
-        // const response = await fetch("../../data/photoTest.json");
-        const response = await fetch("../../../assets/data/photographers.json");
-        const data = await response.json();
-        console.log("data", data.photographers);
-        const photographers = data.photographers;
-        return photographers;
-    } catch (e) {
-        console.log(e);
-    }
-}
+// index.js
+
+import "../../styles/style.css";
+// import "../../styles/maquette_accueil.css";
+import { GetPhotographers } from "../api/Api.js";
+import PhotographerTemplate from "../templates/photographers-cards.js";
+
+const url = "../../../assets/data/photographers.json";
+const api = new GetPhotographers(url);
 
 async function displayData(photographers) {
     const photographersSection = document.querySelector(
         ".photographer_section"
     );
-
     photographers.forEach((photographer) => {
-        const photographerModel = photographerTemplate(photographer);
+        const photographerModel = new PhotographerTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     });
 }
 
 async function init() {
-    const photographers = await getPhotographers();
+    const photographers = await api.getPhotographers();
     displayData(photographers);
 }
 
 init();
+
