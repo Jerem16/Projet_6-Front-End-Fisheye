@@ -1,13 +1,14 @@
-// import { displayModal } from "../utils/contactForm.js";
+import Modal from "../utils/contactForm.js";
 import "../../styles/modal.css";
-export default class ModalForm {
+export default class ModalForm extends Modal {
     constructor(data) {
+        super();
         this.data = data;
     }
-    closeModal() {
-        const modal = document.getElementById("contact_modal");
-        modal.style.display = "none";
-    }
+    // closeModal() {
+    //     const modal = document.getElementById("contact_modal");
+    //     modal.style.display = "none";
+    // }
     getModalForm() {
         const name = this.data.name;
 
@@ -66,6 +67,7 @@ export default class ModalForm {
                         type="mail"
                         id="email"
                         name="email"
+                        autocomplete="email"
                     />
                 </div>
                 <div

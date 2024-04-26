@@ -1,6 +1,7 @@
 // photographer.js
 
 import "../../styles/style.css";
+import "../utils/menuSelected.js"
 // import "../../styles/maquette_pp.css";
 
 
@@ -18,8 +19,8 @@ async function displayData(photographer) {
     const photographersSection = document.querySelector("#main");
 
     const photographerModel = new photographHeadTemplate(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
+    const userCardDOM = photographerModel.getHeaderCardDOM();
+    // photographersSection.appendChild(userCardDOM);
 
     const modalFormPage = document.getElementById("formPage");
     const modal = new ModalForm(photographer);
