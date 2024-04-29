@@ -1,16 +1,13 @@
 import Modal from "../utils/contactForm.js";
+
 export default class PhotographHeadTemplate extends Modal {
     constructor(data) {
         super();
         this.data = data;
-        const portrait = data.portrait;
-        this.portrait = portrait;
-        this.picture = `./assets/images/photographers/${portrait}`;
     }
 
-    getHeaderCardDOM() {
+    getHeaderCardDOM(modalId) {
         const { name, city, country, tagline, portrait } = this.data;
-        const { picture } = this;
 
         const section = document.createElement("section");
         section.classList.add("photograph-header");
@@ -30,7 +27,7 @@ export default class PhotographHeadTemplate extends Modal {
         <div class="header-segment">
             <div class="image-container">
                 <img
-                    src="${picture}"
+                    src="./assets/images/photographers/${portrait}";
                     alt="${name}"
                     style="transform: scale(${this.data.scale}); object-position: ${this.data.position};"
                 />
@@ -41,7 +38,9 @@ export default class PhotographHeadTemplate extends Modal {
         const openModalButton = section.querySelector(
             ".photograph-header button"
         );
-        openModalButton.addEventListener("click", this.openModal);
+        openModalButton.addEventListener("click", () =>
+            this.openModal(modalId)
+        );
 
         return section;
     }

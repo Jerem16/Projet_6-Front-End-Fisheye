@@ -60,31 +60,30 @@ export class SortMedia extends GetMedia {
 
         switch (currentFilter) {
             case "date":
-                sortByDate(media);
-                console.log("date", media);
-                break;
+                return sortByDate(media);
+
             case "likes":
-                sortByPopularity(media);
-                console.log("likes", media);
-                break;
+                return sortByPopularity(media);
+
             case "title":
-                sortByTitle(media);
-                console.log("title", media);
-                break;
+                return sortByTitle(media);
+
             default:
                 return media;
         }
-        return media;
     }
 }
+
 function sortByDate(data) {
     data.sort((a, b) => new Date(a.date) - new Date(b.date));
     return data;
 }
+
 function sortByPopularity(data) {
     data.sort((a, b) => b.likes - a.likes);
     return data;
 }
+
 function sortByTitle(data) {
     data.sort((a, b) => a.title.localeCompare(b.title));
     return data;

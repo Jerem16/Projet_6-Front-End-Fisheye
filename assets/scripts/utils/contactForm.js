@@ -5,13 +5,23 @@ export default class Modal {
         this.openModal = this.openModal.bind(this);
     }
 
-    openModal() {
-        const modal = document.getElementById("contact_modal");
-        modal.style.display = "flex";
+    openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "flex";
+        } else {
+            console.error(`Modal with ID ${modalId} not found.`);
+        }
     }
 
-    closeModal() {
-        const modal = document.getElementById("contact_modal");
-        modal.style.display = "none";
+    closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "none";
+        } else {
+            console.error(`Modal with ID ${modalId} not found.`);
+        }
     }
 }
+
+//

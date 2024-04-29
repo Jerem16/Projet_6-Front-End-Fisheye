@@ -1,44 +1,105 @@
 {
-	"photographers": [
-		{
-			"name": "Marcel Nikolic",
-			"id": 195,
-			"city": "Berlin",
-			"country": "Germany",
-			"tagline": "Toujours à la recherche de LA photo",
-			"price": 300,
-			"portrait": "MarcelNikolic.jpg"
-		}
-	],
-	"media": [
-
-
-		{
-			"id": 52343416,
-			"photographerId": 195,
-			"title": "Japanese Tower, Kyoto",
-			"image": "Travel_Tower.jpg",
-			"likes": 25,
-			"date": "2019-04-03",
-			"price": 60
-		},
-		{
-			"id": 2523434,
-			"photographerId": 195,
-			"title": "Senset on Canals, Venice",
-			"image": "Travel_SunsetonCanals.jpg",
-			"likes": 53,
-			"date": "2019-05-06",
-			"price": 60
-		},
-		{
-			"id": 95293534,
-			"photographerId": 195,
-			"title": "Mountain and Lake",
-			"image": "Travel_OpenMountain.jpg",
-			"likes": 33,
-			"date": "2019-05-12",
-			"price": 60
-		}
-	]
+    "photographers": [
+        {
+            "name": "Marcel Nikolic",
+            "id": 195,
+            "city": "Berlin",
+            "country": "Germany",
+            "tagline": "Toujours à la recherche de LA photo",
+            "price": 300,
+            "portrait": "MarcelNikolic.jpg"
+        }
+    ],
+    "media": [
+        {
+            "id": 52343416,
+            "photographerId": 195,
+            "title": "Japanese Tower, Kyoto",
+            "image": "Travel_Tower.webp",
+            "likes": 25,
+            "date": "2019-04-03",
+            "price": 60
+        },
+        {
+            "id": 2523434,
+            "photographerId": 195,
+            "title": "Senset on Canals, Venice",
+            "image": "Travel_SunsetonCanals.webp",
+            "likes": 53,
+            "date": "2019-05-06",
+            "price": 60
+        },
+        {
+            "id": 95293534,
+            "photographerId": 195,
+            "title": "Mountain and Lake",
+            "image": "Travel_OpenMountain.webp",
+            "likes": 33,
+            "date": "2019-05-12",
+            "price": 60
+        },
+        {
+            "id": 356234343,
+            "photographerId": 195,
+            "title": "City Bike and Stair, Paris",
+            "image": "Travel_Bike_and_Stair.webp",
+            "likes": 53,
+            "date": "2019-06-20",
+            "price": 60
+        },
+        {
+            "id": 235234343,
+            "photographerId": 195,
+            "title": "Adventure Door, India",
+            "image": "Travel _Adventure_Door.webp",
+            "likes": 63,
+            "date": "2019-06-26",
+            "price": 60
+        },
+        {
+            "id": 6234234343,
+            "photographerId": 195,
+            "title": "Contrast, St Petersburg",
+            "image": "Architecture_Contrast.webp",
+            "likes": 52,
+            "date": "2019-06-30",
+            "price": 60
+        },
+        {
+            "id": 6525666253,
+            "photographerId": 195,
+            "title": "On a Hill, Tibet",
+            "image": "Architecture_On_a_hill.webp",
+            "likes": 63,
+            "date": "2019-07-20",
+            "price": 60
+        },
+        {
+            "id": 98252523433,
+            "photographerId": 195,
+            "title": "Leaning Tower, Pisa",
+            "image": "Architecture_Dome.webp",
+            "likes": 88,
+            "date": "2020-01-05",
+            "price": 60
+        },
+        {
+            "id": 9259398453,
+            "photographerId": 195,
+            "title": "Drone shot of Buenos Aires highways",
+            "video": "Architecture_coverr_circle_empty_highway_in_buenos_aires_587740985637.mp4",
+            "likes": 57,
+            "date": "2020-01-20",
+            "price": 65
+        },
+        {
+            "id": 3523523534,
+            "photographerId": 195,
+            "title": "Corner Building and Blue Sky",
+            "image": "Architecture_Corner_Room.webp",
+            "likes": 54,
+            "date": "2020-05-05",
+            "price": 60
+        }
+    ]
 }

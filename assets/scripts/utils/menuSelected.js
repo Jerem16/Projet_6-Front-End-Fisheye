@@ -1,4 +1,5 @@
 import { SortMedia } from "../api/Api.js";
+import displayMedia from "../pages/photographer.js";
 
 export class DisplayMediaMenu extends SortMedia {
     displayMediaMenu() {
@@ -38,6 +39,7 @@ export class DisplayMediaMenu extends SortMedia {
         return sectionMenu;
     }
 }
+
 export class FilterableMedia extends SortMedia {
     constructor(url) {
         super(url);
@@ -45,45 +47,56 @@ export class FilterableMedia extends SortMedia {
         this.selectItems = document.querySelector(".select-items");
         this.arrow = document.querySelector(".up-arrow");
 
-        this.selectValue.parentElement.addEventListener("click", () => {
-            this.selectItems.classList.remove("hide-start");
-            this.selectItems.classList.toggle("active");
-            this.arrow.classList.toggle("down-arrow");
-        });
+        this.handleSelectToggle = this.handleSelectToggle.bind(this);
+        this.handleItemClick = this.handleItemClick.bind(this);
 
-        this.selectItems.addEventListener("click", (event) => {
+        this.selectValue.parentElement.addEventListener(
+            "click",
+            this.handleSelectToggle
+        );
+        this.selectItems.addEventListener("click", this.handleItemClick);
+    }
+
+    handleSelectToggle() {
+        this.selectItems.classList.remove("hide-start");
+        this.selectItems.classList.toggle("active");
+        this.arrow.classList.toggle("down-arrow");
+    }
+
+    handleItemClick(event) {
+        const { tagName } = event.target;
+        if (tagName === "DIV") {
             const filterValue = this.selectValue.getAttribute("data-filter");
             const currentText = this.selectValue.textContent;
-            if (event.target.tagName === "DIV") {
-                this.selectValue.setAttribute(
-                    "data-filter",
-                    event.target.getAttribute("data-filter")
-                );
-                event.target.setAttribute("data-filter", filterValue);
 
-                this.selectValue.textContent = event.target.textContent;
-                event.target.textContent = currentText;
+            this.selectValue.setAttribute(
+                "data-filter",
+                event.target.getAttribute("data-filter")
+            );
+            event.target.setAttribute("data-filter", filterValue);
 
-                this.selectItems.classList.remove("active");
-                this.arrow.classList.toggle("down-arrow");
+            this.selectValue.textContent = event.target.textContent;
+            event.target.textContent = currentText;
 
-                this.updateMedia();
-            }
-        });
+            this.selectItems.classList.remove("active");
+            this.arrow.classList.toggle("down-arrow");
+
+            this.updateMedia();
+        }
     }
-    updateMedia() {
-        const getMedia = new SortMedia();
-        getMedia
-            .sortAllMediaByFilter()
-            .then((media) => {
-                console.log("media", media);
-                // return media;
-            })
-            .catch((error) => {
-                console.error(
-                    "Une erreur s'est produite lors de la récupération des médias :",
-                    error
-                );
-            });
+
+    async updateMedia() {
+        try {
+            const media = await this.sortAllMediaByFilter();
+            const panel = document.querySelector(".panel");
+            panel.innerHTML = "";
+            displayMedia(media);
+            console.log("media", media);
+        } catch (error) {
+            console.error(
+                "Une erreur s'est produite lors de la récupération des médias :",
+                error
+            );
+        }
     }
 }

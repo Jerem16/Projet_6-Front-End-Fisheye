@@ -1,63 +1,47 @@
-import Modal from "../utils/contactForm.js";
-export default class DisplayMediaTemplate extends Modal {
+import MediaElement from "../templates/mediaElement.js";
+
+export default class DisplayMediaTemplate extends MediaElement {
     constructor(data) {
         super();
         this.data = data;
-        // console.log("data DisplayMediaTemplate", this.data);
+        this.mediaElement = new MediaElement(data);
     }
 
-    getMediaCardDOM() {
-        const { title, likes, photographerId, image, video } = this.data;
+    titleElement() {
+        const { title, likes, id, date } = this.data;
+        const mediaTitle = document.createElement("h3");
+        mediaTitle.classList.add("media-title");
+        mediaTitle.innerHTML = `
+            ${title}
+            <span>
+                <p>${likes}</p>
+                <img
+                    src="./assets/images/icons/heart.svg"
+                    alt="like"
+                />
+            </span>
+            
+            <a data-media="${id}" class="card" href="#" tabindex="0">
+                link to ${title}
+            </a><p>${date}</p>
+        `;
+        return mediaTitle;
+    }
 
+    getMediaCardDOM(className, modalId) {
         const panel = document.createElement("article");
         panel.classList.add("media");
 
-        const imageContainer = document.createElement("div");
-        imageContainer.classList.add("image-container");
+        panel.appendChild(this.mediaElement.createElement(className));
 
-        if (image) {
-            imageContainer.innerHTML = `
-                <img
-                    src="./assets/images/photo/${photographerId}/${image}"
-                    alt=""
-                />
-            `;
-        } else {
-            imageContainer.innerHTML = `
-                <video
-                    src="./assets/images/photo/${photographerId}/${video}"
-                    controls
-                    alt="Wild Horses in the Mountains"
-                >
-                    <track
-                        src="#"
-                        kind="subtitles"
-                        srclang="fr"
-                        label="French"
-                    />
-                </video>
-            `;
-        }
+        panel.appendChild(this.titleElement());
 
-        panel.appendChild(imageContainer);
-
-        panel.innerHTML += `
-            <h3 class="media-title">
-                ${title}
-                <span>
-                    <p>${likes}</p>
-                    <img
-                        src="./assets/images/icons/heart.svg"
-                        alt=""
-                    />
-                </span>
-            </h3>
-            <a class="card" href="#" tabindex="0">
-                link to ${title}
-            </a>
-        `;
+        const openMediaModal = panel.querySelector(".media .card");
+        openMediaModal.addEventListener("click", (event) => {
+            this.openModal(modalId);
+            event.preventDefault();
+        });
 
         return panel;
     }
 }
-
