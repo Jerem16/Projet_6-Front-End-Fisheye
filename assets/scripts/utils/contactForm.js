@@ -5,21 +5,21 @@ export default class Modal {
         this.openModal = this.openModal.bind(this);
     }
 
-    openModal(modalId) {
-        const modal = document.getElementById(modalId);
+    openModal(cssIdName) {
+        const modal = document.getElementById(cssIdName);
         if (modal) {
             modal.style.display = "flex";
         } else {
-            console.error(`Modal with ID ${modalId} not found.`);
+            console.error(`Modal with ID ${cssIdName} not found.`);
         }
     }
 
-    closeModal(modalId) {
-        const modal = document.getElementById(modalId);
+    closeModal(cssIdName) {
+        const modal = document.getElementById(cssIdName);
         if (modal) {
             modal.style.display = "none";
         } else {
-            console.error(`Modal with ID ${modalId} not found.`);
+            console.error(`Modal with ID ${cssIdName} not found.`);
         }
     }
 }

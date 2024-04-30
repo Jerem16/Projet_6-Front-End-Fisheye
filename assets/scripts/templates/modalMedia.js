@@ -41,9 +41,8 @@ export default class ModalMedia extends MediaElement {
         return sliderArrows;
     }
 
-    getModalMedia(className, modalId) {
-        const modalPage = document.createElement("div");
-        modalPage.setAttribute("id", "modal_media");
+    getModalMedia(className, cssIdName) {
+        const modalPage = document.getElementById("modal_media");
         modalPage.innerHTML = `                
         <div class="media-slider">
         </div>`;
@@ -58,7 +57,7 @@ export default class ModalMedia extends MediaElement {
 
         sliderContent.appendChild(this.mediaElement.createElement(className));
 
-        closeButton.addEventListener("click", () => this.closeModal(modalId));
+        closeButton.addEventListener("click", () => this.closeModal(cssIdName));
 
         return modalPage;
     }

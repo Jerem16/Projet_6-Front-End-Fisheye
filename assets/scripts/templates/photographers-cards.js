@@ -16,7 +16,7 @@ export default class PhotographerTemplate {
         article.innerHTML = `
             <div class="image-container">
             <img 
-                style="transition: all 1s ease-in-out; transform: scale(${this.data.scale}); object-position: ${this.data.position};"
+
                 src="${picture}"
                 alt="${name}"
             />

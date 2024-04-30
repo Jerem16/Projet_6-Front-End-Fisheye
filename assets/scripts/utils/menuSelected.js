@@ -1,5 +1,5 @@
 import { SortMedia } from "../api/Api.js";
-import displayMedia from "../pages/photographer.js";
+import { displayMedia } from "../pages/photographer.js";
 
 export class DisplayMediaMenu extends SortMedia {
     displayMediaMenu() {
@@ -64,24 +64,28 @@ export class FilterableMedia extends SortMedia {
     }
 
     handleItemClick(event) {
-        const { tagName } = event.target;
-        if (tagName === "DIV") {
-            const filterValue = this.selectValue.getAttribute("data-filter");
-            const currentText = this.selectValue.textContent;
+        // Vérifiez si event.target est défini et est un élément HTML
+        if (event && event.target && event.target.tagName) {
+            const { tagName } = event.target;
+            if (tagName === "DIV") {
+                const filterValue =
+                    this.selectValue.getAttribute("data-filter");
+                const currentText = this.selectValue.textContent;
 
-            this.selectValue.setAttribute(
-                "data-filter",
-                event.target.getAttribute("data-filter")
-            );
-            event.target.setAttribute("data-filter", filterValue);
+                this.selectValue.setAttribute(
+                    "data-filter",
+                    event.target.getAttribute("data-filter")
+                );
+                event.target.setAttribute("data-filter", filterValue);
 
-            this.selectValue.textContent = event.target.textContent;
-            event.target.textContent = currentText;
+                this.selectValue.textContent = event.target.textContent;
+                event.target.textContent = currentText;
 
-            this.selectItems.classList.remove("active");
-            this.arrow.classList.toggle("down-arrow");
+                this.selectItems.classList.remove("active");
+                this.arrow.classList.toggle("down-arrow");
 
-            this.updateMedia();
+                this.updateMedia();
+            }
         }
     }
 
@@ -91,7 +95,7 @@ export class FilterableMedia extends SortMedia {
             const panel = document.querySelector(".panel");
             panel.innerHTML = "";
             displayMedia(media);
-            console.log("media", media);
+            // console.log("media", media);
         } catch (error) {
             console.error(
                 "Une erreur s'est produite lors de la récupération des médias :",

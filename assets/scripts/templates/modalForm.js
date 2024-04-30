@@ -6,7 +6,7 @@ export default class ModalForm extends Modal {
         this.data = data;
     }
 
-    getModalForm(modalId) {
+    getModalForm(cssIdName) {
         const name = this.data.name;
 
         const modalPage = document.createElement("div");
@@ -85,8 +85,9 @@ export default class ModalForm extends Modal {
         </div>
         `;
         const closeButton = modalPage.querySelector(".modal button");
-        closeButton.addEventListener("click", () => this.closeModal(modalId));
+        closeButton.addEventListener("click", () => this.closeModal(cssIdName));
 
         return modalPage;
     }
 }
+

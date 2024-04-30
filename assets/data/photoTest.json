@@ -37,69 +37,6 @@
             "likes": 33,
             "date": "2019-05-12",
             "price": 60
-        },
-        {
-            "id": 356234343,
-            "photographerId": 195,
-            "title": "City Bike and Stair, Paris",
-            "image": "Travel_Bike_and_Stair.webp",
-            "likes": 53,
-            "date": "2019-06-20",
-            "price": 60
-        },
-        {
-            "id": 235234343,
-            "photographerId": 195,
-            "title": "Adventure Door, India",
-            "image": "Travel _Adventure_Door.webp",
-            "likes": 63,
-            "date": "2019-06-26",
-            "price": 60
-        },
-        {
-            "id": 6234234343,
-            "photographerId": 195,
-            "title": "Contrast, St Petersburg",
-            "image": "Architecture_Contrast.webp",
-            "likes": 52,
-            "date": "2019-06-30",
-            "price": 60
-        },
-        {
-            "id": 6525666253,
-            "photographerId": 195,
-            "title": "On a Hill, Tibet",
-            "image": "Architecture_On_a_hill.webp",
-            "likes": 63,
-            "date": "2019-07-20",
-            "price": 60
-        },
-        {
-            "id": 98252523433,
-            "photographerId": 195,
-            "title": "Leaning Tower, Pisa",
-            "image": "Architecture_Dome.webp",
-            "likes": 88,
-            "date": "2020-01-05",
-            "price": 60
-        },
-        {
-            "id": 9259398453,
-            "photographerId": 195,
-            "title": "Drone shot of Buenos Aires highways",
-            "video": "Architecture_coverr_circle_empty_highway_in_buenos_aires_587740985637.mp4",
-            "likes": 57,
-            "date": "2020-01-20",
-            "price": 65
-        },
-        {
-            "id": 3523523534,
-            "photographerId": 195,
-            "title": "Corner Building and Blue Sky",
-            "image": "Architecture_Corner_Room.webp",
-            "likes": 54,
-            "date": "2020-05-05",
-            "price": 60
         }
     ]
 }

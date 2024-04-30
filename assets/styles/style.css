@@ -52,13 +52,19 @@ h1 {
 .image-container {
     width: 200px;
     height: 200px;
+    position: relative;
     overflow: hidden;
     border-radius: 50%;
+    margin: 0;
 }
 .photographer_section article img {
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    width: 224px;
+    height: 224px;
+    object-fit: contain;
+    margin: 0;
 }
 .photographer_section article h2 {
     color: #d3573c;

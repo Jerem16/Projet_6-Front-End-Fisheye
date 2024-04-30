@@ -6,7 +6,7 @@ export default class PhotographHeadTemplate extends Modal {
         this.data = data;
     }
 
-    getHeaderCardDOM(modalId) {
+    getHeaderCardDOM(cssIdName) {
         const { name, city, country, tagline, portrait } = this.data;
 
         const section = document.createElement("section");
@@ -39,7 +39,7 @@ export default class PhotographHeadTemplate extends Modal {
             ".photograph-header button"
         );
         openModalButton.addEventListener("click", () =>
-            this.openModal(modalId)
+            this.openModal(cssIdName)
         );
 
         return section;

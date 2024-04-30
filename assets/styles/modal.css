@@ -87,6 +87,7 @@ header button {
 #modal_media {
     justify-content: center;
     align-items: center;
+    /* display: block; */
 }
 .media-slider {
     border-radius: 8px;
@@ -143,10 +144,10 @@ header button {
     width: calc(100% + 192px);
     display: flex;
     justify-content: space-between;
-    pointer-events: none;
+    /* pointer-events: none; */
+    cursor: pointer;
 }
 .slider-arrows img {
-    cursor: pointer;
     width: 96px;
     height: 96px;
 }

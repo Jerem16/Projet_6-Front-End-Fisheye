@@ -28,9 +28,6 @@ export class GetPhotographers extends Api {
         const data = await this.get();
         return data.photographers;
     }
-}
-
-export class GetPhotographer extends Api {
     async getPhotographerById(id) {
         const data = await this.get();
         return data.photographers.find((p) => p.id === id);
@@ -38,16 +35,27 @@ export class GetPhotographer extends Api {
 }
 
 export class GetMedia extends Api {
-    async GetAllMediaById() {
-        const photographerId = Number(sessionStorage.getItem("photographerId"));
+    constructor(url) {
+        super(url);
+        this._photographerId = Number(sessionStorage.getItem("photographerId"));
+    }
+    async getAllMediaById() {
         const data = await this.get();
-        return data.media.filter((m) => m.photographerId === photographerId);
+        return data.media.filter(
+            (m) => m.photographerId === this._photographerId
+        );
+    }
+    async getMediaById(id) {
+        const data = await this.get();
+        const media = data.media.find((item) => item.id === id);
+        return media ? media : null;
     }
 }
 
 export class SortMedia extends GetMedia {
-    constructor() {
-        super();
+    constructor(url) {
+        super(url);
+        this.mediaApi = new GetMedia(url);
         this.selectValue = document.querySelector(".select-selected span");
     }
 
@@ -56,21 +64,23 @@ export class SortMedia extends GetMedia {
             ? this.selectValue.getAttribute("data-filter")
             : null;
 
-        const media = await this.GetAllMediaById(currentFilter);
-
+        let media = await this.mediaApi.getAllMediaById();
+        let sortedMedia = [];
         switch (currentFilter) {
             case "date":
-                return sortByDate(media);
-
+                sortedMedia = sortByDate([...media]); // Créez une copie triée du tableau
+                break;
             case "likes":
-                return sortByPopularity(media);
-
+                sortedMedia = sortByPopularity([...media]); // Créez une copie triée du tableau
+                break;
             case "title":
-                return sortByTitle(media);
-
+                sortedMedia = sortByTitle([...media]); // Créez une copie triée du tableau
+                break;
             default:
-                return media;
+                sortedMedia = [...media]; // Par défaut, retournez une copie non triée du tableau
+                break;
         }
+        return sortedMedia;
     }
 }
 
@@ -88,3 +98,24 @@ function sortByTitle(data) {
     data.sort((a, b) => a.title.localeCompare(b.title));
     return data;
 }
+
+// async function displayImageById(id) {
+//     const getMediaId = new GetMedia("./assets/data/photographers.json");
+
+//     try {
+//         const mediaId = await getMediaId.getMediaById(id);
+
+//         if (mediaId) {
+//             console.log(`L'image avec l'ID ${id} est : ${mediaId.title}`);
+//         } else {
+//             console.log(`Aucune image trouvée avec l'ID ${id}`);
+//         }
+//     } catch (error) {
+//         console.error(
+//             "Une erreur s'est produite lors de la récupération de l'image :",
+//             error
+//         );
+//     }
+// }
+// const imageId = Number(sessionStorage.getItem("mediaId"));
+// displayImageById(imageId);

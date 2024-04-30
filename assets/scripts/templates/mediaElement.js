@@ -4,13 +4,14 @@ export default class MediaElement extends Modal {
     constructor(data) {
         super();
         this.data = data;
+        this.object = JSON.parse(sessionStorage.getItem("mediaId")); 
     }
 
     createElement(className) {
         const { title, photographerId, image, video, id } = this.data;
         const mediaContainer = document.createElement("div");
         mediaContainer.classList.add(className);
-
+        // console.log(this.object);
         if (image) {
             mediaContainer.innerHTML = `
                 <img
