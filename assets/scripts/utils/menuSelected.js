@@ -1,7 +1,34 @@
 import { SortMedia } from "../api/Api.js";
 import { displayMedia } from "../pages/photographer.js";
+import {
+    // removeURLParameter,
+    addURLParameter,
+    getURLParameter,
+} from "../utils/urlUtils.js";
 
-export class DisplayMediaMenu extends SortMedia {
+const dataMenu = [
+    { value: "likes", text: "Popularité" },
+    { value: "date", text: "Date" },
+    { value: "title", text: "Titre" },
+];
+
+export class DisplayMediaMenu {
+    constructor() {
+        const params = new URL(location.href).searchParams;
+        const mediaFilter = params.get("mediaFilter");
+        const valueFilter = params.get("valueFilter");
+
+        if (mediaFilter && valueFilter) {
+            const filterIndex = dataMenu.findIndex(
+                (item) => item.value === mediaFilter
+            );
+            if (filterIndex !== -1) {
+                const filterItem = dataMenu.splice(filterIndex, 1)[0];
+                dataMenu.unshift(filterItem);
+            }
+        }
+    }
+
     displayMediaMenu() {
         const sectionMenu = document.createElement("section");
         sectionMenu.classList.add("panel-photo");
@@ -10,27 +37,15 @@ export class DisplayMediaMenu extends SortMedia {
             <span class="sort-media">Trier par</span>
             <div class="custom-select">
                 <div class="select-selected select-value">
-                    <span data-filter="likes">Popularité</span>
-                    <svg
-                        class="up-arrow"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 32 32"
-                        fill="none"
-                    >
-                        <path
-                            d="M9.88 20.5466L16 14.44L22.12 20.5466L24 18.6666L16 10.6666L8 18.6666L9.88 20.5466Z"
-                            fill="white"
-                        />
-                    </svg>
+                    <span data-filter="${dataMenu[0].value}">${dataMenu[0].text}</span>
+                    <img src="./assets/images/icons/up-arrow.svg" alt="up-arrow" class="up-arrow">
                 </div>
                 <div class="hide-start select-items">
-                    <div data-filter="date" class="select-value correct">
-                        Date
+                    <div data-filter="${dataMenu[1].value}" class="select-value correct">
+                        ${dataMenu[1].text}
                     </div>
-                    <div data-filter="title" class="select-value correct">
-                        Titre
+                    <div data-filter="${dataMenu[2].value}" class="select-value correct">
+                        ${dataMenu[2].text}
                     </div>
                 </div>
             </div>
@@ -41,8 +56,8 @@ export class DisplayMediaMenu extends SortMedia {
 }
 
 export class FilterableMedia extends SortMedia {
-    constructor(url) {
-        super(url);
+    constructor() {
+        super();
         this.selectValue = document.querySelector(".select-selected span");
         this.selectItems = document.querySelector(".select-items");
         this.arrow = document.querySelector(".up-arrow");
@@ -64,8 +79,7 @@ export class FilterableMedia extends SortMedia {
     }
 
     handleItemClick(event) {
-        // Vérifiez si event.target est défini et est un élément HTML
-        if (event && event.target && event.target.tagName) {
+        if (event?.target?.tagName) {
             const { tagName } = event.target;
             if (tagName === "DIV") {
                 const filterValue =
@@ -94,8 +108,12 @@ export class FilterableMedia extends SortMedia {
             const media = await this.sortAllMediaByFilter();
             const panel = document.querySelector(".panel");
             panel.innerHTML = "";
+            addURLParameter(
+                "mediaFilter",
+                this.selectValue.getAttribute("data-filter")
+            );
+            addURLParameter("valueFilter", this.selectValue.textContent.trim());
             displayMedia(media);
-            // console.log("media", media);
         } catch (error) {
             console.error(
                 "Une erreur s'est produite lors de la récupération des médias :",
@@ -104,3 +122,5 @@ export class FilterableMedia extends SortMedia {
         }
     }
 }
+
+// Fonction utilitaire pour extraire les paramètres de l'URL

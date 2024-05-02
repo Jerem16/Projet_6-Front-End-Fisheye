@@ -1,11 +1,21 @@
+//modalMedia.js
+
 import MediaElement from "../templates/mediaElement.js";
-// import "../../../assets"
+import { SortMedia } from "../api/Api.js";
+import { addURLParameter, removeURLParameter } from "../utils/urlUtils.js";
+
+async function getAllMedia() {
+    const mediaID = new SortMedia();
+    const mediaData = await mediaID.sortAllMediaByFilter();
+    return mediaData;
+}
 
 export default class ModalMedia extends MediaElement {
-    constructor(data) {
+    constructor(data, index) {
         super();
         this.data = data;
-        this.mediaElement = new MediaElement(data);
+        this.currentIndex = index;
+        this.currentData = data[this.currentIndex];
     }
 
     closeButton() {
@@ -28,7 +38,9 @@ export default class ModalMedia extends MediaElement {
     }
 
     sliderContent() {
-        return document.createElement("div");
+        const shoMedia = document.createElement("div");
+        shoMedia.setAttribute("id", "carroussel");
+        return shoMedia;
     }
 
     sliderArrow() {
@@ -40,7 +52,14 @@ export default class ModalMedia extends MediaElement {
         `;
         return sliderArrows;
     }
-
+    updateImage(newData) {
+        const slider = document.getElementById("carroussel");
+        slider.innerHTML = `        
+        `;
+        const media = new MediaElement(newData);
+        slider.appendChild(media.createElement("media-container"));
+        return slider;
+    }
     getModalMedia(className, cssIdName) {
         const modalPage = document.getElementById("modal_media");
         modalPage.innerHTML = `                
@@ -55,7 +74,38 @@ export default class ModalMedia extends MediaElement {
         modalPage.querySelector(".media-slider").appendChild(sliderContent);
         modalPage.querySelector(".media-slider").appendChild(sliderArrows);
 
-        sliderContent.appendChild(this.mediaElement.createElement(className));
+        const media = new MediaElement(this.currentData);
+        sliderContent.appendChild(media.createElement(className));
+
+        closeButton.addEventListener("click", () => {
+            removeURLParameter("mediaID");
+            this.closeModal(cssIdName);
+        });
+
+        const prevButton = modalPage.querySelector(".arrow_left");
+        const nextButton = modalPage.querySelector(".arrow_right");
+
+        prevButton.addEventListener("click", async () => {
+            const allMedia = await getAllMedia();
+            const nbOfIndex = allMedia.length;
+            const prevIndex = (this.currentIndex - 1 + nbOfIndex) % nbOfIndex;
+            const prevData = allMedia[prevIndex];
+            this.currentIndex = prevIndex;
+            this.data = prevData;
+            addURLParameter("mediaID", prevIndex);
+            this.updateImage(prevData);
+        });
+
+        nextButton.addEventListener("click", async () => {
+            const allMedia = await getAllMedia();
+            const nbOfIndex = allMedia.length;
+            const nextIndex = (this.currentIndex + 1) % nbOfIndex;
+            const nextData = allMedia[nextIndex];
+            this.currentIndex = nextIndex;
+            this.data = nextData;
+            addURLParameter("mediaID", nextIndex);
+            this.updateImage(nextData);
+        });
 
         closeButton.addEventListener("click", () => this.closeModal(cssIdName));
 

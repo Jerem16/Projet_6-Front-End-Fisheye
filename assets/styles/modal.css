@@ -14,7 +14,7 @@ textarea {
     position: fixed;
     background: rgba(196, 196, 196, 0.4);
     top: 0;
-    left: calc(-50vw + 720px);
+    left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 10;
@@ -120,8 +120,9 @@ header button {
     background-color: transparent;
     position: relative;
     overflow: hidden;
-    width: 1050px;
-    max-height: 900px;
+    /* width: 1050px; */
+    width: 100%;
+    /* max-height: 900px; */
     height: auto;
     display: flex;
     justify-content: center;
@@ -131,8 +132,10 @@ header button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .slider-content img {
-    max-width: 1050px;
-    max-height: 900px;
+    /* max-width: 1050px; */
+    /* max-height: 900px; */
+    width: 100%;
+
     object-fit: cover;
     object-position: center 40%;
 }

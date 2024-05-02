@@ -1,12 +1,16 @@
+//photographer-media.js
 import MediaElement from "../templates/mediaElement.js";
-import { GetPhotographers, SortMedia, GetMedia } from "../api/Api.js";
+import { SortMedia } from "../api/Api.js";
 import { displayMediaModal } from "../pages/photographer.js";
+import { addURLParameter } from "../utils/urlUtils.js";
 
 export default class DisplayMediaTemplate extends MediaElement {
     constructor(data) {
         super();
         this.data = data;
         this.mediaElement = new MediaElement(data);
+        this.params = new URL(location.href).searchParams;
+        this.mediaId = Number(this.params.get("mediaID"));
     }
 
     titleElement() {
@@ -42,39 +46,34 @@ export default class DisplayMediaTemplate extends MediaElement {
 
         const openMediaModal = panel.querySelector(".media .card");
         openMediaModal.addEventListener("click", async (event) => {
+            event.preventDefault();
             const index = this.data.id;
-            const mediaIndex = await getMediaIndex(index);
-            const allMedia = await getAllMedia();
-            sessionStorage.setItem("mediaId", JSON.stringify(index));
-            sessionStorage.setItem("mediaIndex", JSON.stringify(mediaIndex));
-            // Obtenez l'index de l'objet dans le tableau
 
-            // index = mediaIndex;
-            // Vérifier si cardData.id est un nombre valide
-            // if (!isNaN(cardData.id)) {
+            const allMedia = await getAllMedia();
+            const mediaIndex = await getMediaIndex(index);
             const mediaModal = document.getElementById("modal_media");
             mediaModal.innerHTML = "";
-
-            // const allMedia = await getAllMedia();
-            // const mediaIndex = await getMediaIndex(cardData.id);
-            // console.log("mediaIndex", mediaIndex);
-            // console.log("allMedia", allMedia[mediaIndex]);
-            displayMediaModal(allMedia[mediaIndex]);
-            // }
+            addURLParameter("mediaID", mediaIndex);
+            displayMediaModal(allMedia, mediaIndex);
 
             this.openModal(cssIdName);
-            event.preventDefault();
         });
+        if (this.mediaId) {
+            console.log("mediaId", this.mediaId);
+            this.openModalIndex(cssIdName);
+        }
 
         return panel;
     }
+
+    async openModalIndex(cssIdName) {
+        const index = this.mediaId;
+        const allMedia = await getAllMedia();
+        displayMediaModal(allMedia, index);
+        this.openModal(cssIdName);
+    }
 }
 
-async function getMediaModalId(id) {
-    const mediaID = new GetMedia();
-    const mediaModalId = await mediaID.getMediaById(id);
-    return mediaModalId;
-}
 async function getAllMedia() {
     const mediaID = new SortMedia();
     const mediaData = await mediaID.sortAllMediaByFilter();

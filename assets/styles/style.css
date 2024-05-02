@@ -49,7 +49,8 @@ h1 {
     margin: 0;
     max-height: 315px;
 }
-.image-container {
+.image-container,
+.photograph-header .image-container {
     width: 200px;
     height: 200px;
     position: relative;
@@ -57,7 +58,7 @@ h1 {
     border-radius: 50%;
     margin: 0;
 }
-.photographer_section article img {
+.photographer_section article img, .photograph-header .image-container img {
     position: absolute;
     top: -12px;
     left: -12px;

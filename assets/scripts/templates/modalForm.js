@@ -1,5 +1,5 @@
 import Modal from "../utils/contactForm.js";
-// import "../../styles/modal.css";
+
 export default class ModalForm extends Modal {
     constructor(data) {
         super();

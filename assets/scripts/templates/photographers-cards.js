@@ -1,7 +1,6 @@
 export default class PhotographerTemplate {
     constructor(data) {
         this.data = data;
-        console.log("data PhotographerTemplate", this.data);
         const portrait = data.portrait;
         this.portrait = portrait;
         this.picture = `./assets/images/photographers/${portrait}`;
@@ -16,7 +15,6 @@ export default class PhotographerTemplate {
         article.innerHTML = `
             <div class="image-container">
             <img 
-
                 src="${picture}"
                 alt="${name}"
             />

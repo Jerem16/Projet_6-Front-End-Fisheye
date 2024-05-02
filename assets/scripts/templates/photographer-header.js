@@ -29,7 +29,6 @@ export default class PhotographHeadTemplate extends Modal {
                 <img
                     src="./assets/images/photographers/${portrait}";
                     alt="${name}"
-                    style="transform: scale(${this.data.scale}); object-position: ${this.data.position};"
                 />
             </div>
         </div>

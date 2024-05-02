@@ -7,8 +7,6 @@
             "country": "UK",
             "tagline": "Voir le beau dans le quotidien",
             "price": 400,
-            "scale": 1.5,
-            "position": "0px -27px",
             "portrait": "MimiKeel.webp"
         },
         {
@@ -17,8 +15,6 @@
             "city": "Paris",
             "country": "France",
             "tagline": "Capturer des compositions complexes",
-            "position": "center 17px",
-            "scale": 1.75,
             "price": 250,
             "portrait": "EllieRoseWilkens.webp"
         },
@@ -28,8 +24,6 @@
             "city": "Montreal",
             "country": "Canada",
             "tagline": "Photographe freelance",
-            "position": "17px center",
-            "scale": 1.25,
             "price": 500,
             "portrait": "TracyGalindo.webp"
         },
@@ -39,8 +33,6 @@
             "city": "Mexico City",
             "country": "Mexico",
             "tagline": "Toujours aller de l'avant",
-            "position": "0px -27px",
-            "scale": 1.35,
             "price": 350,
             "portrait": "NabeelBradford.webp"
         },
@@ -50,8 +42,6 @@
             "city": "Barcelona",
             "country": "Spain",
             "tagline": "Je crée des souvenirs",
-            "position": "center 19px",
-            "scale": 1.65,
             "price": 275,
             "portrait": "RhodeDubois.webp"
         },
@@ -61,8 +51,6 @@
             "city": "Berlin",
             "country": "Germany",
             "tagline": "Toujours à la recherche de LA photo",
-            "position": "center 19px",
-            "scale": 1.7,
             "price": 300,
             "portrait": "MarcelNikolic.webp"
         }

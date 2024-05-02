@@ -98,24 +98,3 @@ function sortByTitle(data) {
     data.sort((a, b) => a.title.localeCompare(b.title));
     return data;
 }
-
-// async function displayImageById(id) {
-//     const getMediaId = new GetMedia("./assets/data/photographers.json");
-
-//     try {
-//         const mediaId = await getMediaId.getMediaById(id);
-
-//         if (mediaId) {
-//             console.log(`L'image avec l'ID ${id} est : ${mediaId.title}`);
-//         } else {
-//             console.log(`Aucune image trouvée avec l'ID ${id}`);
-//         }
-//     } catch (error) {
-//         console.error(
-//             "Une erreur s'est produite lors de la récupération de l'image :",
-//             error
-//         );
-//     }
-// }
-// const imageId = Number(sessionStorage.getItem("mediaId"));
-// displayImageById(imageId);
