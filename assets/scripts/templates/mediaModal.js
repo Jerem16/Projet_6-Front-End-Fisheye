@@ -1,6 +1,6 @@
 //modalMedia.js
 
-import MediaElement from "../templates/mediaElement.js";
+import MediaElement from "./mediaElement.js";
 import { SortMedia } from "../api/Api.js";
 import { addURLParameter, removeURLParameter } from "../utils/urlUtils.js";
 
@@ -23,16 +23,7 @@ export default class ModalMedia extends MediaElement {
         closeButton.setAttribute("type", "button");
         closeButton.setAttribute("tabindex", "0");
         closeButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
-            <g clip-path="url(#clip0_120_794)">
-                <path d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z" fill="#911C1C"/>
-            </g>
-            <defs>
-                <clipPath id="clip0_120_794">
-                    <rect width="72" height="72" fill="white"/>
-                </clipPath>
-            </defs>
-        </svg>
+        <img src="./assets/images/icons/closeMedia.svg" alt="close button">
         `;
         return closeButton;
     }
@@ -83,7 +74,9 @@ export default class ModalMedia extends MediaElement {
         });
 
         const prevButton = modalPage.querySelector(".arrow_left");
+        prevButton.setAttribute("tabindex", "0");
         const nextButton = modalPage.querySelector(".arrow_right");
+        nextButton.setAttribute("tabindex", "0");
 
         prevButton.addEventListener("click", async () => {
             const allMedia = await getAllMedia();

@@ -1,9 +1,7 @@
 import { SortMedia } from "../api/Api.js";
 import { displayMedia } from "../pages/photographer.js";
 import {
-    // removeURLParameter,
     addURLParameter,
-    getURLParameter,
 } from "../utils/urlUtils.js";
 
 const dataMenu = [
@@ -35,7 +33,7 @@ export class DisplayMediaMenu {
         sectionMenu.innerHTML = `
             <h2 class="hide-title">Medias panel</h2>
             <span class="sort-media">Trier par</span>
-            <div class="custom-select">
+            <div class="btn custom-select">
                 <div class="select-selected select-value">
                     <span data-filter="${dataMenu[0].value}">${dataMenu[0].text}</span>
                     <img src="./assets/images/icons/up-arrow.svg" alt="up-arrow" class="up-arrow">
@@ -123,4 +121,3 @@ export class FilterableMedia extends SortMedia {
     }
 }
 
-// Fonction utilitaire pour extraire les paramètres de l'URL

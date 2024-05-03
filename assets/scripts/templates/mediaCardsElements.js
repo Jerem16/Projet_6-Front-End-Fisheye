@@ -1,5 +1,5 @@
 //photographer-media.js
-import MediaElement from "../templates/mediaElement.js";
+import MediaElement from "./mediaElement.js";
 import { SortMedia } from "../api/Api.js";
 import { displayMediaModal } from "../pages/photographer.js";
 import { addURLParameter } from "../utils/urlUtils.js";
@@ -30,12 +30,7 @@ export default class DisplayMediaTemplate extends MediaElement {
         return mediaTitle;
     }
 
-    getCardData() {
-        const { id, image, video, title, likes, date, price } = this.data;
-        return { id, image, video, title, likes, date, price };
-    }
-
-    getMediaCardDOM(className, cssIdName, index, mediaModalId) {
+    getMediaCardDOM(className, cssIdName, mediaModalId) {
         const panel = document.createElement("article");
         panel.classList.add("media");
 
@@ -47,27 +42,25 @@ export default class DisplayMediaTemplate extends MediaElement {
         const openMediaModal = panel.querySelector(".media .card");
         openMediaModal.addEventListener("click", async (event) => {
             event.preventDefault();
-            const index = this.data.id;
-
-            const allMedia = await getAllMedia();
-            const mediaIndex = await getMediaIndex(index);
-            const mediaModal = document.getElementById("modal_media");
-            mediaModal.innerHTML = "";
-            addURLParameter("mediaID", mediaIndex);
-            displayMediaModal(allMedia, mediaIndex);
-
-            this.openModal(cssIdName);
+            this.openMediaModal(cssIdName);
         });
         if (this.mediaId) {
-            console.log("mediaId", this.mediaId);
-            this.openModalIndex(cssIdName);
+            this.renderMediaModalIndex(cssIdName, this.mediaId);
         }
 
         return panel;
     }
 
-    async openModalIndex(cssIdName) {
-        const index = this.mediaId;
+    async openMediaModal(cssIdName) {
+        const index = this.data.id;
+        const mediaIndex = await getMediaIndex(index);
+        const mediaModal = document.getElementById("modal_media");
+        mediaModal.innerHTML = "";
+        addURLParameter("mediaID", mediaIndex);
+        this.renderMediaModalIndex(cssIdName, mediaIndex);
+    }
+
+    async renderMediaModalIndex(cssIdName, index) {
         const allMedia = await getAllMedia();
         displayMediaModal(allMedia, index);
         this.openModal(cssIdName);

@@ -1,7 +1,7 @@
 // index.js
 
 import { GetPhotographers } from "../api/Api.js";
-import PhotographerTemplate from "../templates/photographers-cards.js";
+import PhotographerTemplate from "../templates/photographersCards.js";
 
 const api = new GetPhotographers();
 

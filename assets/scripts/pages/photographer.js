@@ -1,11 +1,10 @@
 // photographer.js
-import photographHeadTemplate from "../templates/photographer-header.js";
+import photographHeadTemplate from "../templates/mediaHeader.js";
 import { GetPhotographers, SortMedia } from "../api/Api.js";
 import { DisplayMediaMenu, FilterableMedia } from "../utils/menuSelected.js";
-import DisplayMediaTemplate from "../templates/photographer-media.js";
-import { getURLParameter } from "../utils/urlUtils.js";
+import DisplayMediaTemplate from "../templates/mediaCardsElements.js";
 import ModalForm from "../templates/modalForm.js";
-import ModalMedia from "../templates/modalMedia.js";
+import ModalMedia from "../templates/mediaModal.js";
 
 const params = new URL(location.href).searchParams;
 const idParams = Number(params.get("id"));
@@ -17,12 +16,11 @@ const modalSection = document.getElementById("formPage");
 
 sessionStorage.setItem("photographerId", photographerId);
 const api = new GetPhotographers();
-const media = new SortMedia();
 
 async function displayData(photographer) {
     const photographerModel = new photographHeadTemplate(photographer);
     const headerCardDOM = photographerModel.getHeaderCardDOM("contact_modal");
-    photographersSection.prepend(headerCardDOM);
+    // photographersSection.append(headerCardDOM);
 
     const modal = new ModalForm(photographer);
     const modalRender = modal.getModalForm("contact_modal");

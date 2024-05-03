@@ -47,8 +47,6 @@ class ImageElement {
         return imageContainer;
     }
 }
-
-// Élément média pour les vidéos
 class VideoElement {
     constructor(data) {
         this.data = data;
