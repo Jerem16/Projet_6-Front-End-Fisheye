@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+    <head>
+        <meta charset="utf-8" />
+        <title>Fisheye - Photographe</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="Jérémy Lemaignent" />
+        <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin=""
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./assets/styles/style.css" />
+        <link rel="stylesheet" href="./assets/styles/photographer.css" />
+        <link rel="stylesheet" href="./assets/styles/modal.css" />
+    </head>
+    <body>
+        <header>
+            <a href="index.html">
+                <img
+                    src="./assets/images/logo.png"
+                    class="logo"
+                    alt="fisheye logo"
+            /></a>
+        </header>
+        <main id="main">
+            <section class="photograph-header">
+                <div class="header-segment">
+                    <div class="photograph-info"></div>
+                </div>
+                <div class="header-segment">
+                    <button
+                        type="button"
+                        class="btn contact_button"
+                        tabindex="0"
+                    >
+                        Contactez-moi
+                    </button>
+                </div>
+                <div class="header-segment">
+                    <div class="header_image"></div>
+                </div>
+            </section>
+        </main>
+        <!-- <div id="modal_media"></div> -->
+        <template id="modal_Form">
+            <div id="contact_modal">
+                <div class="modal">
+                    <header>
+                        <h2>Contactez-moi</h2>
+                        <button type="button" tabindex="0">
+                            <img
+                                src="./assets/images/icons/close.svg"
+                                alt="close"
+                            />
+                        </button>
+
+                        <h2>Ellie-Rose Wilkens</h2>
+                    </header>
+                    <form>
+                        <div
+                            class="formData firstName"
+                            data-error-visible="false"
+                            data-error="Veuillez entrer votre prénom, minimum 2 caractères"
+                        >
+                            <label for="firstName">Prénom</label>
+
+                            <input
+                                class="text-control"
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                            />
+                        </div>
+                        <div
+                            class="formData lastName"
+                            data-error-visible="false"
+                            data-error="Veuillez entrer votre nom, minimum 2 caractères"
+                        >
+                            <label for="lastName">Nom</label>
+                            <input
+                                class="text-control"
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                minlength="2"
+                            />
+                        </div>
+                        <div
+                            class="formData email"
+                            data-error-visible="false"
+                            data-error="Veuillez entrer une adresse électronique valide"
+                        >
+                            <label for="email">Email</label>
+                            <input
+                                class="text-control"
+                                type="email"
+                                id="email"
+                                name="email"
+                                autocomplete="email"
+                            />
+                        </div>
+                        <div
+                            class="formData message"
+                            data-error-visible="false"
+                            data-error="Veuillez entrer une adresse électronique valide"
+                        >
+                            <label for="message">Votre message</label>
+                            <textarea
+                                class="text-control"
+                                id="message"
+                                name="message"
+                            >
+                            </textarea>
+                        </div>
+                        <button class="contact_button">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </template>
+        <template id="modal_media">
+            <div class="media-slider">
+                <button type="button" tabindex="0">
+                    <img
+                        src="./assets/images/icons/closeMedia.svg"
+                        alt="close button"
+                    />
+                </button>
+                <div id="carroussel">
+                    <!-- <div class="media-container">
+                        <img
+                            data-media="235343222"
+                            src="./assets/images/photo/930/sport_water_tunnel.webp"
+                            alt="Surfer"
+                        />
+                    </div> -->
+                </div>
+                <div class="slider-arrows">
+                    <img
+                        class="arrow arrow_left"
+                        src="./assets/images/icons/arrow.svg"
+                        alt="arrow_left"
+                        tabindex="0"
+                    />
+                    <img
+                        class="arrow arrow_right"
+                        src="./assets/images/icons/arrow.svg"
+                        alt="arrow_right"
+                        tabindex="0"
+                    />
+                </div>
+            </div>
+        </template>
+
+        <script
+            type="module"
+            src="./assets/scripts/pages/photographer.js"
+        ></script>
+    </body>
+</html>
