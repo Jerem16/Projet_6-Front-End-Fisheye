@@ -58,7 +58,7 @@
                 <div class="modal">
                     <header>
                         <h2>Contactez-moi</h2>
-                        <button type="button" tabindex="0">
+                        <button class="closeButton" type="button" tabindex="0">
                             <img
                                 src="./assets/images/icons/close.svg"
                                 alt="close"
@@ -67,7 +67,7 @@
 
                         <h2 class="name">name</h2>
                     </header>
-                    <form>
+                    <form id="contactMessage">
                         <div
                             class="formData firstName"
                             data-error-visible="false"
@@ -113,17 +113,16 @@
                         <div
                             class="formData message"
                             data-error-visible="false"
-                            data-error="Veuillez entrer une adresse électronique valide"
+                            data-error="Veuillez entrer un message, minimum 15 caractères"
                         >
                             <label for="message">Votre message</label>
                             <textarea
                                 class="text-control"
                                 id="message"
                                 name="message"
-                            >
-                            </textarea>
+                            ></textarea>
                         </div>
-                        <button class="contact_button">Envoyer</button>
+                        <button class="btn contact_button">Envoyer</button>
                     </form>
                 </div>
             </div>

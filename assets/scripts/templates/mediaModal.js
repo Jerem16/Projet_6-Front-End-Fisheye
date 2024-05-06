@@ -18,6 +18,7 @@ export default class ModalMedia extends MediaElement {
 
     closeButton() {
         const closeButton = document.createElement("button");
+        closeButton.classList.add("closeButton");
         closeButton.setAttribute("type", "button");
         closeButton.setAttribute("tabindex", "0");
         closeButton.innerHTML = `
@@ -130,23 +131,24 @@ export default class ModalMedia extends MediaElement {
     }
 }
 window.addEventListener("keydown", async (event) => {
-    // Si la touche "Escape" est enfoncée, ferme le modal
     if (event.key === "Escape") {
-        const closeButton = document.querySelector(".media-slider button");
-        if (closeButton) {
+        const closeButton = document.querySelector(".closeButton");
+        const closeMediaButton = document.querySelector(
+            ".media-slider .closeButton"
+        );
+        if (closeButton || closeMediaButton) {
             closeButton.click();
+            closeMediaButton.click();
         }
     }
 
-    // Si la touche "ArrowLeft" est enfoncée, sélectionne le bouton précédent
     if (event.key === "ArrowLeft") {
         const prevButton = document.querySelector(".arrow_left");
         if (prevButton) {
             prevButton.focus();
         }
     }
-
-    // Si la touche "ArrowRight" est enfoncée, sélectionne le bouton suivant
+    
     if (event.key === "ArrowRight") {
         const nextButton = document.querySelector(".arrow_right");
         if (nextButton) {
