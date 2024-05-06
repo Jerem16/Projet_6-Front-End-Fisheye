@@ -5,48 +5,60 @@ import { addURLParameter } from "../utils/urlUtils.js";
 export class FilterableMedia extends SortMedia {
     constructor() {
         super();
-        this.selectValue = document.querySelector(".select-selected span");
-        this.selectItems = document.querySelector(".select-items");
-        this.arrow = document.querySelector(".up-arrow");
+        this.selectContainer = document.querySelector(".custom-select");
+        this.selectValue = this.selectContainer.querySelector(
+            ".select-selected span"
+        );
+        this.selectItems = this.selectContainer.querySelector(".select-items");
+        this.arrow = this.selectContainer.querySelector(".up-arrow");
 
         this.handleSelectToggle = this.handleSelectToggle.bind(this);
         this.handleItemClick = this.handleItemClick.bind(this);
+        this.handleDocumentClick = this.handleDocumentClick.bind(this);
 
         this.selectValue.parentElement.addEventListener(
             "click",
             this.handleSelectToggle
         );
         this.selectItems.addEventListener("click", this.handleItemClick);
+        document.addEventListener("click", this.handleDocumentClick);
     }
 
-    handleSelectToggle() {
+    handleSelectToggle(event) {
+        event.stopPropagation();
         this.selectItems.classList.remove("hide-start");
         this.selectItems.classList.toggle("active");
         this.arrow.classList.toggle("down-arrow");
     }
 
+    handleDocumentClick(event) {
+        event.stopPropagation();
+        const activeItem = this.selectContainer.querySelector(".active");
+        if (!event.target.closest(".custom-select") && activeItem) {
+            this.selectItems.classList.remove("active");
+            this.arrow.classList.remove("down-arrow");
+        }
+    }
+
     handleItemClick(event) {
-        if (event?.target?.tagName) {
-            const { tagName } = event.target;
-            if (tagName === "DIV") {
-                const filterValue =
-                    this.selectValue.getAttribute("data-filter");
-                const currentText = this.selectValue.textContent;
+        event.stopPropagation();
+        if (event?.target?.tagName === "DIV") {
+            const filterValue = this.selectValue.getAttribute("data-filter");
+            const currentText = this.selectValue.textContent;
 
-                this.selectValue.setAttribute(
-                    "data-filter",
-                    event.target.getAttribute("data-filter")
-                );
-                event.target.setAttribute("data-filter", filterValue);
+            this.selectValue.setAttribute(
+                "data-filter",
+                event.target.getAttribute("data-filter")
+            );
+            event.target.setAttribute("data-filter", filterValue);
 
-                this.selectValue.textContent = event.target.textContent;
-                event.target.textContent = currentText;
+            this.selectValue.textContent = event.target.textContent;
+            event.target.textContent = currentText;
 
-                this.selectItems.classList.remove("active");
-                this.arrow.classList.toggle("down-arrow");
+            this.selectItems.classList.remove("active");
+            this.arrow.classList.toggle("down-arrow");
 
-                this.updateMedia();
-            }
+            this.updateMedia();
         }
     }
 
