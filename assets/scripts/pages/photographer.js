@@ -1,30 +1,44 @@
 // photographer.js
 import photographHeadTemplate from "../templates/mediaHeader.js";
-import { GetPhotographers, SortMedia } from "../api/Api.js";
-import { DisplayMediaMenu, FilterableMedia } from "../utils/menuSelected.js";
+import {
+    GetPhotographers,
+    GetMedia,
+    likesCalculator,
+    SortMedia,
+} from "../api/Api.js";
+import { FilterableMedia } from "../utils/menuSelected.js";
+import { DisplayMediaMenu } from "../templates/mediaMenu.js";
 import DisplayMediaTemplate from "../templates/mediaCardsElements.js";
+import FooterTemplate from "../templates/mediaFooterInfo.js";
 import ModalForm from "../templates/modalForm.js";
 import ModalMedia from "../templates/mediaModal.js";
+import {
+    preloadImages,
+    downloadImagesInBackground,
+} from "../utils/preloadImages.js";
 
 const params = new URL(location.href).searchParams;
 const idParams = Number(params.get("id"));
 const id = Number(sessionStorage.getItem("photographerId"));
 const photographerId = idParams || id;
 
+const indexParams = params.get("mediaID");
+const mediaIndex = indexParams;
+
 const photographersSection = document.querySelector("main");
-const modalSection = document.getElementById("formPage");
 
 sessionStorage.setItem("photographerId", photographerId);
 const api = new GetPhotographers();
+const media = new GetMedia();
 
-async function displayData(photographer) {
+const imageUrls = [];
+
+async function displayData(photographer, mediaData, nbLikes) {
     const photographerModel = new photographHeadTemplate(photographer);
     const headerCardDOM = photographerModel.getHeaderCardDOM("contact_modal");
-    // photographersSection.append(headerCardDOM);
 
     const modal = new ModalForm(photographer);
     const modalRender = modal.getModalForm("contact_modal");
-    modalSection.appendChild(modalRender);
 
     const menu = new DisplayMediaMenu();
     const filterMenu = menu.displayMediaMenu();
@@ -32,6 +46,27 @@ async function displayData(photographer) {
 
     const runFilterMenu = new FilterableMedia();
     runFilterMenu.updateMedia();
+
+    const footer = new FooterTemplate(photographer.price, nbLikes);
+    const footerRender = footer.displayFooterCardDOM();
+
+    if (mediaIndex) {
+        const mediaID = new SortMedia();
+        const mediaData1 = await mediaID.sortAllMediaByFilter();
+        const modalMedia = new ModalMedia(mediaData1, Number(mediaIndex));
+        const modalMediaRender = modalMedia.renderModal(
+            "media-container",
+            "modal_media"
+        );
+        const modal = document.getElementById("modal_media");
+        modal.style.display = "flex";
+        console.log("mediaIndex ok", mediaIndex);
+        return modalMediaRender;
+    } else {
+        console.log("mediaIndex ko", mediaIndex);
+    }
+
+    return [headerCardDOM, modalRender, footerRender];
 }
 
 async function init() {
@@ -39,7 +74,10 @@ async function init() {
         window.location.href = "http://127.0.0.1:5500/index.html";
     } else {
         const photographer = await api.getPhotographerById(photographerId);
-        displayData(photographer);
+        const mediaData = await media.getAllMediaById(photographerId);
+        const nbLikes = likesCalculator(mediaData);
+        displayData(photographer, mediaData, nbLikes);
+        preloadMedia(mediaData);
     }
 }
 
@@ -47,8 +85,8 @@ init();
 
 export async function displayMedia(mediaData) {
     const panel = document.querySelector(".panel");
-    mediaData.forEach((media) => {
-        const DisplayMedia = new DisplayMediaTemplate(media);
+    mediaData.forEach((media, thumbnails) => {
+        const DisplayMedia = new DisplayMediaTemplate(media, thumbnails);
         const mediaCardDOM = DisplayMedia.getMediaCardDOM(
             "media-container",
             "modal_media"
@@ -59,13 +97,28 @@ export async function displayMedia(mediaData) {
 
 export async function displayMediaModal(array, index) {
     const modalMedia = new ModalMedia(array, index);
-    const modalMediaRender = modalMedia.getModalMedia(
+    const modalMediaRender = modalMedia.renderModal(
         "media-container",
         "modal_media"
     );
-    if (modalMediaRender instanceof Node) {
-        modalSection.appendChild(modalMediaRender);
-    } else {
-        console.error("Modal media render is not a valid HTML element.");
-    }
+    return modalMediaRender;
+}
+
+export async function preloadMedia(mediaData) {
+    mediaData.forEach((media) => {
+        if (media.image) {
+            imageUrls.push(
+                `./assets/images/photo/${photographerId}/${media.image}`
+            );
+        } else if (media.video) {
+            return;
+        } else {
+            console.error(
+                "Ni l'URL de l'image ni l'URL de la vidéo ne sont définies pour le média :",
+                media
+            );
+        }
+    });
+    await preloadImages(imageUrls);
+    await downloadImagesInBackground(imageUrls);
 }

@@ -1,5 +1,3 @@
-//modalMedia.js
-
 import MediaElement from "./mediaElement.js";
 import { SortMedia } from "../api/Api.js";
 import { addURLParameter, removeURLParameter } from "../utils/urlUtils.js";
@@ -51,8 +49,25 @@ export default class ModalMedia extends MediaElement {
         slider.appendChild(media.createElement("media-container"));
         return slider;
     }
-    getModalMedia(className, cssIdName) {
-        const modalPage = document.getElementById("modal_media");
+    async handleMediaChange(direction) {
+        const allMedia = await getAllMedia();
+        const nbOfIndex = allMedia.length;
+        const nextIndex =
+            (this.currentIndex + direction + nbOfIndex) % nbOfIndex;
+        const nextData = allMedia[nextIndex];
+        this.currentIndex = nextIndex;
+        this.data = nextData;
+        addURLParameter("mediaID", nextIndex);
+        this.updateImage(nextData);
+    }
+
+    renderModal(className, cssIdName) {
+        const templateModalMedia = document.getElementById("media");
+        const modalMedia = document.importNode(
+            templateModalMedia.content,
+            true
+        );
+        const modalPage = modalMedia.getElementById("modal_media");
         modalPage.innerHTML = `                
         <div class="media-slider">
         </div>`;
@@ -61,9 +76,9 @@ export default class ModalMedia extends MediaElement {
         const closeButton = this.closeButton();
         const sliderArrows = this.sliderArrow();
 
-        modalPage.querySelector(".media-slider").appendChild(closeButton);
-        modalPage.querySelector(".media-slider").appendChild(sliderContent);
-        modalPage.querySelector(".media-slider").appendChild(sliderArrows);
+        modalPage
+            .querySelector(".media-slider")
+            .append(closeButton, sliderContent, sliderArrows);
 
         const media = new MediaElement(this.currentData);
         sliderContent.appendChild(media.createElement(className));
@@ -71,6 +86,10 @@ export default class ModalMedia extends MediaElement {
         closeButton.addEventListener("click", () => {
             removeURLParameter("mediaID");
             this.closeModal(cssIdName);
+            const modalMediaElement = document.getElementById(cssIdName);
+            if (modalMediaElement) {
+                modalMediaElement.remove();
+            }
         });
 
         const prevButton = modalPage.querySelector(".arrow_left");
@@ -79,29 +98,59 @@ export default class ModalMedia extends MediaElement {
         nextButton.setAttribute("tabindex", "0");
 
         prevButton.addEventListener("click", async () => {
-            const allMedia = await getAllMedia();
-            const nbOfIndex = allMedia.length;
-            const prevIndex = (this.currentIndex - 1 + nbOfIndex) % nbOfIndex;
-            const prevData = allMedia[prevIndex];
-            this.currentIndex = prevIndex;
-            this.data = prevData;
-            addURLParameter("mediaID", prevIndex);
-            this.updateImage(prevData);
+            await this.handleMediaChange(-1);
         });
 
         nextButton.addEventListener("click", async () => {
-            const allMedia = await getAllMedia();
-            const nbOfIndex = allMedia.length;
-            const nextIndex = (this.currentIndex + 1) % nbOfIndex;
-            const nextData = allMedia[nextIndex];
-            this.currentIndex = nextIndex;
-            this.data = nextData;
-            addURLParameter("mediaID", nextIndex);
-            this.updateImage(nextData);
+            await this.handleMediaChange(1);
         });
 
-        closeButton.addEventListener("click", () => this.closeModal(cssIdName));
+        prevButton.addEventListener("keydown", async (event) => {
+            if (
+                event.key === "Enter" ||
+                event.key === " " ||
+                event.key === "ArrowLeft"
+            ) {
+                event.preventDefault();
+                await this.handleMediaChange(-1);
+            }
+        });
 
-        return modalPage;
+        nextButton.addEventListener("keydown", async (event) => {
+            if (
+                event.key === "Enter" ||
+                event.key === " " ||
+                event.key === "ArrowRight"
+            ) {
+                event.preventDefault();
+                await this.handleMediaChange(1);
+            }
+        });
+        return document.body.appendChild(modalPage);
     }
 }
+window.addEventListener("keydown", async (event) => {
+    // Si la touche "Escape" est enfoncée, ferme le modal
+    if (event.key === "Escape") {
+        const closeButton = document.querySelector(".media-slider button");
+        if (closeButton) {
+            closeButton.click();
+        }
+    }
+
+    // Si la touche "ArrowLeft" est enfoncée, sélectionne le bouton précédent
+    if (event.key === "ArrowLeft") {
+        const prevButton = document.querySelector(".arrow_left");
+        if (prevButton) {
+            prevButton.focus();
+        }
+    }
+
+    // Si la touche "ArrowRight" est enfoncée, sélectionne le bouton suivant
+    if (event.key === "ArrowRight") {
+        const nextButton = document.querySelector(".arrow_right");
+        if (nextButton) {
+            nextButton.focus();
+        }
+    }
+});

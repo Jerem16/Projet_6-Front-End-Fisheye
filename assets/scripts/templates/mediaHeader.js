@@ -1,4 +1,4 @@
-import Modal from "../utils/contactForm.js";
+import Modal from "../utils/openAndCoseModal.js";
 
 export default class PhotographHeadTemplate extends Modal {
     constructor(data) {
@@ -22,13 +22,13 @@ export default class PhotographHeadTemplate extends Modal {
         const headerImage = document.querySelector(".header_image");
         headerImage.innerHTML = `
         <img
-            src="./assets/images/photographers/${portrait}";
+            src="./assets/images/photographers/${portrait}"
             alt="${name}"
         />
         `;
         return headerImage;
     }
-    
+
     getHeaderCardDOM(cssIdName) {
         const titleContent = this.createHeaderTitle();
         const imageContent = this.createHeaderImage();

@@ -9,33 +9,40 @@ export default class DisplayMediaTemplate extends MediaElement {
         super();
         this.data = data;
         this.mediaElement = new MediaElement(data);
+        this.thumbnails = true;
         this.params = new URL(location.href).searchParams;
         this.mediaId = Number(this.params.get("mediaID"));
     }
 
     titleElement() {
-        const { title, likes, id } = this.data;
-        const mediaTitle = document.createElement("h3");
-        mediaTitle.classList.add("media-title");
+        const { title, likes } = this.data;
+        const mediaTitle = document.createElement("div");
+        mediaTitle.classList.add("title-inline");
         mediaTitle.innerHTML = `
-            ${title}
-            <span>
+            <h3 class="media-title">${title}</h3>
+            <div class="nb-like">
                 <p>${likes}</p>
                 <img src="./assets/images/icons/heart.svg" alt="like" />
-            </span>
-            <a data-media="${id}" class="card" href="#" tabindex="0">
-                link to ${title}
-            </a>
+            </div>
         `;
         return mediaTitle;
     }
 
     getMediaCardDOM(className, cssIdName, mediaModalId) {
+        const { title, id } = this.data;
         const panel = document.createElement("article");
         panel.classList.add("media");
-
+        panel.innerHTML = `
+            <a data-media="${id}" class="card" href="#" tabindex="0">
+                link to ${title}
+            </a>
+        `;
         panel.appendChild(
-            this.mediaElement.createElement(className, mediaModalId)
+            this.mediaElement.createElement(
+                className,
+                this.thumbnails,
+                mediaModalId
+            )
         );
         panel.appendChild(this.titleElement());
 
@@ -44,9 +51,6 @@ export default class DisplayMediaTemplate extends MediaElement {
             event.preventDefault();
             this.openMediaModal(cssIdName);
         });
-        if (this.mediaId) {
-            this.renderMediaModalIndex(cssIdName, this.mediaId);
-        }
 
         return panel;
     }
@@ -54,8 +58,6 @@ export default class DisplayMediaTemplate extends MediaElement {
     async openMediaModal(cssIdName) {
         const index = this.data.id;
         const mediaIndex = await getMediaIndex(index);
-        const mediaModal = document.getElementById("modal_media");
-        mediaModal.innerHTML = "";
         addURLParameter("mediaID", mediaIndex);
         this.renderMediaModalIndex(cssIdName, mediaIndex);
     }

@@ -1,4 +1,3 @@
-// export { displayModal };
 export default class Modal {
     constructor() {
         this.closeModal = this.closeModal.bind(this);
@@ -23,5 +22,3 @@ export default class Modal {
         }
     }
 }
-
-//

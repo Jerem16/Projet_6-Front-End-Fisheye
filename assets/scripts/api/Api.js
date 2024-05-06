@@ -1,5 +1,4 @@
 // Api.js
-
 class Api {
     /**
      * @param {string} url
@@ -48,14 +47,13 @@ export class GetMedia extends Api {
     async getMediaById(id) {
         const data = await this.get();
         const media = data.media.find((item) => item.id === id);
-        return media ? media : null;
+        return media;
     }
 }
 
 export class SortMedia extends GetMedia {
     constructor(url) {
         super(url);
-        this.mediaApi = new GetMedia(url);
         this.selectValue = document.querySelector(".select-selected span");
     }
 
@@ -64,20 +62,20 @@ export class SortMedia extends GetMedia {
             ? this.selectValue.getAttribute("data-filter")
             : null;
 
-        let media = await this.mediaApi.getAllMediaById();
+        let media = await this.getAllMediaById();
         let sortedMedia = [];
         switch (currentFilter) {
             case "date":
-                sortedMedia = sortByDate([...media]); // Créez une copie triée du tableau
+                sortedMedia = sortByDate([...media]);
                 break;
             case "likes":
-                sortedMedia = sortByPopularity([...media]); // Créez une copie triée du tableau
+                sortedMedia = sortByPopularity([...media]);
                 break;
             case "title":
-                sortedMedia = sortByTitle([...media]); // Créez une copie triée du tableau
+                sortedMedia = sortByTitle([...media]);
                 break;
             default:
-                sortedMedia = [...media]; // Par défaut, retournez une copie non triée du tableau
+                sortedMedia = [...media];
                 break;
         }
         return sortedMedia;
@@ -97,4 +95,10 @@ function sortByPopularity(data) {
 function sortByTitle(data) {
     data.sort((a, b) => a.title.localeCompare(b.title));
     return data;
+}
+
+export function likesCalculator(media) {
+    const likesReducer = (accumulator, media) => accumulator + media.likes;
+    const totalLikes = media.reduce(likesReducer, 0);
+    return totalLikes;
 }

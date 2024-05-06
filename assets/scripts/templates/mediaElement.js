@@ -1,8 +1,9 @@
-import Modal from "../utils/contactForm.js";
+import Modal from "../utils/openAndCoseModal.js";
 
 class MediaFactory {
     constructor(data) {
         this.data = data;
+        this.thumbnails;
     }
     createMediaElement() {
         const { image, video } = this.data;
@@ -22,9 +23,14 @@ class MediaElement extends Modal {
         super();
         this.factory = new MediaFactory(data);
     }
-    createElement(className) {
-        const mediaElement = this.factory.createMediaElement(className);
-        return mediaElement ? mediaElement.createElement(className) : null;
+    createElement(className, thumbnails) {
+        const mediaElement = this.factory.createMediaElement(
+            className,
+            thumbnails
+        );
+        return mediaElement
+            ? mediaElement.createElement(className, thumbnails)
+            : null;
     }
 }
 
@@ -33,39 +39,49 @@ class ImageElement {
         this.data = data;
     }
 
-    createElement(className) {
+    createElement(className, thumbnails) {
         const { title, photographerId, image, id } = this.data;
+        let imagePath = `./assets/images/photo/${photographerId}/`;
+
+        if (thumbnails) {
+            imagePath += `thumbnails/thumb-${image}`;
+        } else {
+            imagePath += image;
+        }
+        // imagePath = `./assets/images/photo/${photographerId}/${image}`;
         const imageContainer = document.createElement("div");
-        imageContainer.classList.add(className); 
+        imageContainer.classList.add(className);
         imageContainer.innerHTML = `
             <img
                 data-media="${id}"
-                src="./assets/images/photo/${photographerId}/${image}"
+                src="${imagePath}"
                 alt="${title}"
             />
         `;
         return imageContainer;
     }
 }
+
 class VideoElement {
     constructor(data) {
         this.data = data;
     }
 
-    createElement(className) {
+    createElement(className, thumbnails) {
         const { title, photographerId, video, id } = this.data;
+        let imagePath = `./assets/images/photo/${photographerId}/${video}`;
+
         const videoContainer = document.createElement("div");
-        videoContainer.classList.add(className); 
+        videoContainer.classList.add(className);
         videoContainer.innerHTML = `
             <video
                 data-media="${id}"
-                src="./assets/images/photo/${photographerId}/${video}"
+                src="${imagePath}"
                 controls
-                alt="${title}"
             >
                 <track
                     src="#"
-                    kind="subtitles"
+                    label="${title}"
                     srclang="fr"
                     label="French"
                 />
