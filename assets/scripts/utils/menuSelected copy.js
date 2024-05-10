@@ -6,9 +6,6 @@ export class FilterableMedia extends SortMedia {
     constructor() {
         super();
         this.selectContainer = document.querySelector(".custom-select");
-        this.end = document
-            .querySelector(".custom-select")
-            .setAttribute("aria-expanded", false);
         this.selectValue = this.selectContainer.querySelector(
             ".select-selected span"
         );
@@ -21,18 +18,15 @@ export class FilterableMedia extends SortMedia {
         this.selectContainer.addEventListener(
             "keydown",
             this.handleKeyDown.bind(this)
-            // this.handleDocumentClick.bind(this)
         );
+
         this.selectValue.parentElement.parentElement.addEventListener(
             "click",
             this.handleSelectToggle
         );
 
-        // if (this.end) {
-        //     console.log("Ouvert");
-        // }
-
         this.selectItems.addEventListener("click", this.handleItemClick);
+        // this.selectItems.addEventListener("keydown", this.handleItemClick);
         document.addEventListener("click", this.handleDocumentClick);
     }
 
@@ -44,12 +38,36 @@ export class FilterableMedia extends SortMedia {
         this.selectContainer.setAttribute("aria-expanded", true);
     }
 
-    handleDocumentClick(event) {
-        event.stopPropagation();
-        const activeItem = this.selectContainer.querySelector(".active");
-        if (!event.target.closest(".custom-select") && activeItem) {
-            this.selectItems.classList.remove("active");
-            this.arrow.classList.remove("down-arrow");
+    handleKeyDown(event) {
+        if (event.key === "Enter") {
+            this.handleSelectToggle(event);
+        } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+            event.preventDefault(); // Empêche le défilement de la page avec les touches fléchées
+            this.handleArrowKeyPress(event);
+        }
+    }
+
+    handleArrowKeyPress(event) {
+        const activeIndex = Array.from(this.selectItems.children).indexOf(
+            this.selectItems.querySelector(".active")
+        );
+        const items = Array.from(this.selectItems.children);
+
+        if (event.key === "ArrowDown") {
+            const nextIndex = (activeIndex + 1) % items.length;
+            this.activateOption(items[nextIndex]);
+        } else if (event.key === "ArrowUp") {
+            const nextIndex = (activeIndex - 1 + items.length) % items.length;
+            this.activateOption(items[nextIndex]);
+        }
+    }
+
+    activateOption(option) {
+        if (option) {
+            const activeItem = this.selectItems.querySelector(".active");
+            if (activeItem) activeItem.classList.remove("active");
+            option.classList.add("active");
+            option.focus(); // Met en surbrillance l'option sélectionnée
         }
     }
 
@@ -66,27 +84,23 @@ export class FilterableMedia extends SortMedia {
 
             this.selectValue.textContent = event.target.textContent;
             event.target.textContent = currentText;
-            this.selectItems.classList.remove("active");
-            this.closeMenu(event);
-            this.arrow.classList.toggle("down-arrow");
-            this.selectContainer.setAttribute("aria-expanded", false);
 
+            this.selectItems.classList.remove("active");
+            this.arrow.classList.remove("down-arrow");
+            this.selectContainer.setAttribute("aria-expanded", false);
             this.updateMedia();
         }
     }
 
-    handleKeyDown(event) {
-        if (event.key === "Enter") {
-            this.handleItemClick(event);
+    handleDocumentClick(event) {
+        event.stopPropagation();
+        const activeItem = this.selectContainer.querySelector(".active");
+        if (!event.target.closest(".custom-select") && activeItem) {
+            this.selectItems.classList.remove("active");
+            this.arrow.classList.remove("down-arrow");
         }
     }
-    closeMenu() {
-        const ariaExpandedValue =
-            this.selectContainer.getAttribute("aria-expanded");
-        if (ariaExpandedValue === "true") {
-            this.selectItems.classList.toggle("active");
-        }
-    }
+
     async updateMedia() {
         try {
             const media = await this.sortAllMediaByFilter();

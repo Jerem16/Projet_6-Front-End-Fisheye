@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+    <head>
+        <meta charset="utf-8" />
+        <title>Fisheye</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="Jérémy Lemaignent" />
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin=""
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&amp;display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="./assets/styles/style.css" />
+        <!-- Code injected by Five-server -->
+        <script
+            async=""
+            data-id="five-server"
+            data-file="y:\OpenClassrom\001_OpenClassrooms_Projets\Projet_6\Projet_6-Front-End-Fisheye\index.html"
+            type="application/javascript"
+            src="/fiveserver.js"
+        ></script>
+        <style>
+            /* Injected by five-server */
+            /*[data-highlight="true"] {
+    border: 1px rgb(90,170,255) solid !important;
+    background-color: rgba(155,215,255,0.5);
+    animation: fadeOutHighlight 1s forwards 0.5s;
+  }
+  img[data-highlight="true"] {
+    filter: sepia(100%) hue-rotate(180deg) saturate(200%);
+    animation: fadeOutHighlightIMG 0.5s forwards 0.5s;
+  }*/
+            @keyframes fadeOutHighlight {
+                from {
+                    background-color: rgba(155, 215, 255, 0.5);
+                }
+                to {
+                    background-color: rgba(155, 215, 255, 0);
+                }
+            }
+            @keyframes fadeOutHighlightIMG {
+                0% {
+                    filter: sepia(100%) hue-rotate(180deg) saturate(200%);
+                }
+                33% {
+                    filter: sepia(66%) hue-rotate(180deg) saturate(100%);
+                }
+                50% {
+                    filter: sepia(50%) hue-rotate(90deg) saturate(50%);
+                }
+                66% {
+                    filter: sepia(33%) hue-rotate(0deg) saturate(100%);
+                }
+                100% {
+                    filter: sepia(0%) hue-rotate(0deg) saturate(100%);
+                }
+            }
+            @keyframes fiveserverInfoPopup {
+                0% {
+                    top: -40px;
+                }
+                15% {
+                    top: 4px;
+                }
+                85% {
+                    top: 4px;
+                }
+                100% {
+                    top: -40px;
+                }
+            }
+            /*smaller*/
+            @media (max-width: 640px) {
+                #fiveserver-info-wrapper {
+                    max-width: 98%;
+                }
+                #fiveserver-info {
+                    border-radius: 0px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="/index.html">
+                <img
+                    src="./assets/images/logo.png"
+                    class="logo"
+                    alt="fisheye logo"
+            /></a>
+            <h1>Nos photographes</h1>
+        </header>
+        <main id="main">
+            <div class="photographer_section">
+                <article data-id="243">
+                    <div class="image-container">
+                        <img
+                            src="./assets/images/photographers/MimiKeel.webp"
+                            alt="Mimi Keel"
+                        />
+                    </div>
+                    <h2>Mimi Keel</h2>
+                    <p class="location">London, UK</p>
+                    <p class="tagline">Voir le beau dans le quotidien</p>
+                    <p class="trj">400/jours</p>
+                    <a
+                        class="card"
+                        href="./photographer.html?id=243"
+                        tabindex="0"
+                    >
+                        link to Mimi Keel
+                    </a>
+                </article>
+                <article data-id="930">
+                    <div class="image-container">
+                        <img
+                            src="./assets/images/photographers/EllieRoseWilkens.webp"
+                            alt="Ellie-Rose Wilkens"
+                        />
+                    </div>
+                    <h2>Ellie-Rose Wilkens</h2>
+                    <p class="location">Paris, France</p>
+                    <p class="tagline">Capturer des compositions complexes</p>
+                    <p class="trj">250/jours</p>
+                    <a
+                        class="card"
+                        href="./photographer.html?id=930"
+                        tabindex="0"
+                    >
+                        link to Ellie-Rose Wilkens
+                    </a>
+                </article>
+                <article data-id="82">
+                    <div class="image-container">
+                        <img
+                            src="./assets/images/photographers/TracyGalindo.webp"
+                            alt="Tracy Galindo"
+                        />
+                    </div>
+                    <h2>Tracy Galindo</h2>
+                    <p class="location">Montreal, Canada</p>
+                    <p class="tagline">Photographe freelance</p>
+                    <p class="trj">500/jours</p>
+                    <a
+                        class="card"
+                        href="./photographer.html?id=82"
+                        tabindex="0"
+                    >
+                        link to Tracy Galindo
+                    </a>
+                </article>
+                <article data-id="527">
+                    <div class="image-container">
+                        <img
+                            src="./assets/images/photographers/NabeelBradford.webp"
+                            alt="Nabeel Bradford"
+                        />
+                    </div>
+                    <h2>Nabeel Bradford</h2>
+                    <p class="location">Mexico City, Mexico</p>
+                    <p class="tagline">Toujours aller de l'avant</p>
+                    <p class="trj">350/jours</p>
+                    <a
+                        class="card"
+                        href="./photographer.html?id=527"
+                        tabindex="0"
+                    >
+                        link to Nabeel Bradford
+                    </a>
+                </article>
+                <article data-id="925">
+                    <div class="image-container">
+                        <img
+                            src="./assets/images/photographers/RhodeDubois.webp"
+                            alt="Rhode Dubois"
+                        />
+                    </div>
+                    <h2>Rhode Dubois</h2>
+                    <p class="location">Barcelona, Spain</p>
+                    <p class="tagline">Je crée des souvenirs</p>
+                    <p class="trj">275/jours</p>
+                    <a
+                        class="card"
+                        href="./photographer.html?id=925"
+                        tabindex="0"
+                    >
+                        link to Rhode Dubois
+                    </a>
+                </article>
+                <article data-id="195">
+                    <div class="image-container">
+                        <img
+                            src="./assets/images/photographers/MarcelNikolic.webp"
+                            alt="Marcel Nikolic"
+                        />
+                    </div>
+                    <h2>Marcel Nikolic</h2>
+                    <p class="location">Berlin, Germany</p>
+                    <p class="tagline">Toujours à la recherche de LA photo</p>
+                    <p class="trj">300/jours</p>
+                    <a
+                        class="card"
+                        href="./photographer.html?id=195"
+                        tabindex="0"
+                    >
+                        link to Marcel Nikolic
+                    </a>
+                </article>
+            </div>
+        </main>
+        <script type="module" src="./assets/scripts/pages/index.js"></script>
+    </body>
+</html>

@@ -18,9 +18,7 @@ import {
 } from "../utils/preloadImages.js";
 
 const params = new URL(location.href).searchParams;
-const idParams = Number(params.get("id"));
-const id = Number(sessionStorage.getItem("photographerId"));
-const photographerId = idParams || id;
+const photographerId = Number(params.get("id"));
 
 const indexParams = params.get("mediaID");
 const mediaIndex = indexParams;
@@ -62,16 +60,15 @@ async function displayData(photographer, mediaData, nbLikes) {
         modal.style.display = "flex";
         console.log("mediaIndex ok", mediaIndex);
         return modalMediaRender;
-    } else {
-        console.log("mediaIndex ko", mediaIndex);
     }
 
     return [headerCardDOM, modalRender, footerRender];
 }
 
 async function init() {
-    if (!photographerId) {
-        window.location.href = "http://127.0.0.1:5500/index.html";
+    console.log(photographerId);
+    if (!photographerId || photographerId === null) {
+        window.location.pathname = "/index.html";
     } else {
         const photographer = await api.getPhotographerById(photographerId);
         const mediaData = await media.getAllMediaById(photographerId);

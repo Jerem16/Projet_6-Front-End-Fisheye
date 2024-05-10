@@ -7,6 +7,10 @@ export default class PhotographHeadTemplate extends Modal {
     }
 
     createHeaderTitle() {
+        if (!this.data) {
+            window.location.pathname = "/index.html";
+            return;
+        }
         const { name, city, country, tagline } = this.data;
         const headerInfo = document.querySelector(".photograph-info");
         headerInfo.innerHTML = `

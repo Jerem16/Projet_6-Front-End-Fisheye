@@ -1,8 +1,4 @@
 import Modal from "../utils/openAndCoseModal.js";
-// import { validate } from "../utils/form-validation.js";
-
-// import Modal from "../utils/openAndCloseModal.js";
-// import { validate } from "../utils/form-validation.js";
 
 class ModalForm extends Modal {
     constructor(data) {
@@ -10,9 +6,17 @@ class ModalForm extends Modal {
         this.data = data;
     }
 
-    getModalForm(cssIdName) {
+    async loadTemplate() {
+        const response = await fetch("../../../templates.html");
+        const templateText = await response.text();
+        const parser = new DOMParser();
+        const templateDoc = parser.parseFromString(templateText, "text/html");
+        return templateDoc.getElementById("modal_Form");
+    }
+
+    async getModalForm(cssIdName) {
         const name = this.data.name;
-        const templateForm = document.getElementById("modal_Form");
+        const templateForm = await this.loadTemplate();
         const form = document.importNode(templateForm.content, true);
         const headerName = form.querySelector(".name");
         headerName.textContent = name;
@@ -24,13 +28,13 @@ class ModalForm extends Modal {
 
         contactForm.addEventListener("submit", (event) => {
             event.preventDefault();
-            console.log("non valide");
             if (this.validate()) {
-                console.log("valide");
-
-                // this.reserveForm.dataset.readyToSubmit = true;
-                // this.endValidationMessage.classList.remove("hidden");
-                //! If the form has been validated and submitted, it will be automatically submitted upon modal closure. See modal.js line 17.
+                const formData = new FormData(event.target);
+                for (const entry of formData.entries()) {
+                    console.log(entry[0] + ": " + entry[1]);
+                }
+                contactForm.reset();
+                this.closeModal(cssIdName);
             }
         });
         return document.body.appendChild(form);
@@ -57,8 +61,6 @@ class ModalForm extends Modal {
         } else {
             printError.setAttribute("data-error-visible", "false");
         }
-
-        // Add input event to reevaluate validation on every change
         inputVerification.addEventListener("change", () => {
             this.validateEmail(inputVerification, printError);
         });

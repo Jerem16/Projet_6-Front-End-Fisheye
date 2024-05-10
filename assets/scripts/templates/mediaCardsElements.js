@@ -33,10 +33,9 @@ export default class DisplayMediaTemplate extends MediaElement {
         const panel = document.createElement("article");
         panel.classList.add("media");
         panel.innerHTML = `
-            <a data-media="${id}" class="card" href="#" tabindex="0">
-                link to ${title}
-            </a>
-        `;
+        <button  type="button" data-media="${id}" class="button_card" tabindex="0" aria-label="link to ${title}">
+        </button>
+    `;
         panel.appendChild(
             this.mediaElement.createElement(
                 className,
@@ -46,12 +45,11 @@ export default class DisplayMediaTemplate extends MediaElement {
         );
         panel.appendChild(this.titleElement());
 
-        const openMediaModal = panel.querySelector(".media .card");
+        const openMediaModal = panel.querySelector(".media .button_card");
         openMediaModal.addEventListener("click", async (event) => {
             event.preventDefault();
             this.openMediaModal(cssIdName);
         });
-
         return panel;
     }
 

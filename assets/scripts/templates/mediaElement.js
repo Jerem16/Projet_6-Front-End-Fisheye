@@ -80,7 +80,7 @@ class VideoElement {
                 controls
             >
                 <track
-                    src="#"
+                    src="./assets/subtitles/subtitles.vtt"
                     label="${title}"
                     srclang="fr"
                     label="French"

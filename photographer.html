@@ -17,6 +17,7 @@
             href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap"
             rel="stylesheet"
         />
+        <link rel="import" href="templates.html" />
         <link rel="stylesheet" href="./assets/styles/style.css" />
         <link rel="stylesheet" href="./assets/styles/photographer.css" />
         <link rel="stylesheet" href="./assets/styles/modal.css" />
@@ -50,83 +51,8 @@
             </section>
         </main>
         <footer>
-            <div class="info">
-            </div>
+            <div class="info"></div>
         </footer>
-        <template id="modal_Form">
-            <div id="contact_modal">
-                <div class="modal">
-                    <header>
-                        <h2>Contactez-moi</h2>
-                        <button class="closeButton" type="button" tabindex="0">
-                            <img
-                                src="./assets/images/icons/close.svg"
-                                alt="close"
-                            />
-                        </button>
-
-                        <h2 class="name">name</h2>
-                    </header>
-                    <form id="contactMessage">
-                        <div
-                            class="formData firstName"
-                            data-error-visible="false"
-                            data-error="Veuillez entrer votre prénom, minimum 2 caractères"
-                        >
-                            <label for="firstName">Prénom</label>
-
-                            <input
-                                class="text-control"
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                            />
-                        </div>
-                        <div
-                            class="formData lastName"
-                            data-error-visible="false"
-                            data-error="Veuillez entrer votre nom, minimum 2 caractères"
-                        >
-                            <label for="lastName">Nom</label>
-                            <input
-                                class="text-control"
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                minlength="2"
-                            />
-                        </div>
-                        <div
-                            class="formData email"
-                            data-error-visible="false"
-                            data-error="Veuillez entrer une adresse électronique valide"
-                        >
-                            <label for="email">Email</label>
-                            <input
-                                class="text-control"
-                                type="email"
-                                id="email"
-                                name="email"
-                                autocomplete="email"
-                            />
-                        </div>
-                        <div
-                            class="formData message"
-                            data-error-visible="false"
-                            data-error="Veuillez entrer un message, minimum 15 caractères"
-                        >
-                            <label for="message">Votre message</label>
-                            <textarea
-                                class="text-control"
-                                id="message"
-                                name="message"
-                            ></textarea>
-                        </div>
-                        <button class="btn contact_button">Envoyer</button>
-                    </form>
-                </div>
-            </div>
-        </template>
         <template id="media">
             <div id="modal_media"></div>
         </template>
