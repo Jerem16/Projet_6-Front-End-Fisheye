@@ -21,6 +21,7 @@ const params = new URL(location.href).searchParams;
 const photographerId = Number(params.get("id"));
 
 const indexParams = params.get("mediaID");
+let likeParams = Number(params.get("like"));
 const mediaIndex = indexParams;
 
 const photographersSection = document.querySelector("main");
@@ -30,8 +31,7 @@ const api = new GetPhotographers();
 const media = new GetMedia();
 
 const imageUrls = [];
-
-async function displayData(photographer, mediaData, nbLikes) {
+async function displayData(photographer, mediaData, nbLikes, newLikeParams) {
     const photographerModel = new photographHeadTemplate(photographer);
     const headerCardDOM = photographerModel.getHeaderCardDOM("contact_modal");
 
@@ -47,6 +47,9 @@ async function displayData(photographer, mediaData, nbLikes) {
 
     const footer = new FooterTemplate(photographer.price, nbLikes);
     const footerRender = footer.displayFooterCardDOM();
+
+
+
 
     if (mediaIndex) {
         const mediaID = new SortMedia();
@@ -66,13 +69,15 @@ async function displayData(photographer, mediaData, nbLikes) {
 }
 
 async function init() {
-    console.log(photographerId);
     if (!photographerId || photographerId === null) {
         window.location.pathname = "/index.html";
     } else {
         const photographer = await api.getPhotographerById(photographerId);
         const mediaData = await media.getAllMediaById(photographerId);
         const nbLikes = likesCalculator(mediaData);
+        // const newLikeParams = nbLikes + likeParams;
+        // likeParams = newLikeParams;
+
         displayData(photographer, mediaData, nbLikes);
         preloadMedia(mediaData);
     }

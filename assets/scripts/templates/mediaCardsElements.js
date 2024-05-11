@@ -5,13 +5,15 @@ import { displayMediaModal } from "../pages/photographer.js";
 import { addURLParameter } from "../utils/urlUtils.js";
 
 export default class DisplayMediaTemplate extends MediaElement {
-    constructor(data) {
+    static count = 0;
+    constructor(data, price) {
         super();
         this.data = data;
         this.mediaElement = new MediaElement(data);
         this.thumbnails = true;
         this.params = new URL(location.href).searchParams;
         this.mediaId = Number(this.params.get("mediaID"));
+        this.price = price;
     }
 
     titleElement() {
@@ -22,7 +24,18 @@ export default class DisplayMediaTemplate extends MediaElement {
             <h3 class="media-title">${title}</h3>
             <div class="nb-like">
                 <p>${likes}</p>
-                <img src="./assets/images/icons/heart.svg" alt="like" />
+                <button 
+                    type="button" 
+                    class="btn-like" 
+                    tabindex="0" 
+                    aria-label="like it"
+                >
+                    <img 
+                        src="./assets/images/icons/heart.svg" 
+                        alt="like" 
+                        data-liked="false"
+                    />
+                </button>
             </div>
         `;
         return mediaTitle;
@@ -50,9 +63,40 @@ export default class DisplayMediaTemplate extends MediaElement {
             event.preventDefault();
             this.openMediaModal(cssIdName);
         });
+        const likeButtons = panel.querySelectorAll(".btn-like");
+        likeButtons.forEach((likeButton) => {
+            likeButton.addEventListener("click", (event) => {
+                this.handleLike(event.target);
+            });
+        });
+
         return panel;
     }
 
+    handleLike(button) {
+        const nbLikeContainer = button
+            .closest(".media")
+            .querySelector(".nb-like");
+        const likeCountElement = nbLikeContainer.querySelector("p");
+        let currentLikes = parseInt(likeCountElement.textContent);
+        if (button.dataset.liked === "false") {
+            DisplayMediaTemplate.count++;
+            currentLikes++;
+            likeCountElement.textContent = currentLikes;
+            button.dataset.liked = true;
+            const footerLike = document.querySelector(".info .nb-like p");
+            const newValue = Number(footerLike.textContent);
+            footerLike.textContent = newValue + 1;
+        } else if (button.dataset.liked === "true") {
+            DisplayMediaTemplate.count--;
+            currentLikes--;
+            likeCountElement.textContent = currentLikes;
+            button.dataset.liked = false;
+            const footerLike = document.querySelector(".info .nb-like p");
+            const newValue = Number(footerLike.textContent);
+            footerLike.textContent = newValue - 1;
+        }
+    }
     async openMediaModal(cssIdName) {
         const index = this.data.id;
         const mediaIndex = await getMediaIndex(index);

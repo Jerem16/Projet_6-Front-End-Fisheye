@@ -21,17 +21,11 @@ export class FilterableMedia extends SortMedia {
         this.selectContainer.addEventListener(
             "keydown",
             this.handleKeyDown.bind(this)
-            // this.handleDocumentClick.bind(this)
         );
         this.selectValue.parentElement.parentElement.addEventListener(
             "click",
             this.handleSelectToggle
         );
-
-        // if (this.end) {
-        //     console.log("Ouvert");
-        // }
-
         this.selectItems.addEventListener("click", this.handleItemClick);
         document.addEventListener("click", this.handleDocumentClick);
     }
@@ -67,7 +61,7 @@ export class FilterableMedia extends SortMedia {
             this.selectValue.textContent = event.target.textContent;
             event.target.textContent = currentText;
             this.selectItems.classList.remove("active");
-            this.closeMenu(event);
+            this.closeKeyMenu(event);
             this.arrow.classList.toggle("down-arrow");
             this.selectContainer.setAttribute("aria-expanded", false);
 
@@ -80,7 +74,7 @@ export class FilterableMedia extends SortMedia {
             this.handleItemClick(event);
         }
     }
-    closeMenu() {
+    closeKeyMenu() {
         const ariaExpandedValue =
             this.selectContainer.getAttribute("aria-expanded");
         if (ariaExpandedValue === "true") {
