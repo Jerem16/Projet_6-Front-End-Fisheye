@@ -17,13 +17,19 @@ export default class PhotographerTemplate {
             <img 
                 src="${picture}"
                 alt="${name}"
+                width="224"
+                height="224"
             />
             </div>
             <h2>${name}</h2>
             <p class="location">${city}, ${country}</p>
             <p class="tagline">${tagline}</p>
             <p class="trj">${price}/jours</p>
-            <a class="card" href="./photographer.html?id=${id}" tabindex="0">
+            <a 
+                class="card" 
+                href="./photographer.html?id=${id}" 
+                tabindex="0"
+            >
                 link to ${name}
             </a>
         `;

@@ -132,12 +132,17 @@ export default class ModalMedia extends MediaElement {
 }
 window.addEventListener("keydown", async (event) => {
     if (event.key === "Escape") {
-        const closeButton = document.querySelector(".closeButton");
+        const closeButton = document.querySelector(".modal .closeButton");
         const closeMediaButton = document.querySelector(
             ".media-slider .closeButton"
         );
-        if (closeButton || closeMediaButton) {
+        const closeMenuButton = document.querySelector(
+            ".panel-photo .custom-select"
+        );
+        if (closeButton) {
             closeButton.click();
+        }
+        if (closeMediaButton) {
             closeMediaButton.click();
         }
     }
@@ -148,7 +153,7 @@ window.addEventListener("keydown", async (event) => {
             prevButton.focus();
         }
     }
-    
+
     if (event.key === "ArrowRight") {
         const nextButton = document.querySelector(".arrow_right");
         if (nextButton) {

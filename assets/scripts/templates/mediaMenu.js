@@ -62,8 +62,8 @@ export class DisplayMediaMenu {
                     <div 
                         role="option"
                         aria-selected="false"
-                        data-filter="${dataMenu[1].value}" class="select-value correct"
-                        tabindex="0"
+                        data-filter="${dataMenu[1].value}" 
+                        class="select-value correct"
                     >
                         ${dataMenu[1].text}
                     </div>
@@ -71,7 +71,6 @@ export class DisplayMediaMenu {
                         role="option"
                         aria-selected="false"
                         data-filter="${dataMenu[2].value}" class="select-value correct"
-                        tabindex="0"
                     >
                         ${dataMenu[2].text}
                     </div>
@@ -79,6 +78,7 @@ export class DisplayMediaMenu {
             </button>
             <div class="panel"></div>
         `;
+
         return sectionMenu;
     }
 }

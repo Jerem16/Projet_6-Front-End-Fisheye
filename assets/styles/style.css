@@ -26,25 +26,23 @@ h1 {
     font-weight: 400;
     line-height: normal;
 }
-.card:focus {
+*:focus {
     outline: none;
     border: none;
-}
-/* .card:focus img {
-    border: 1px solid #901c1c;
-}
-.card:focus {
-    outline: none;
-    border: none;
-} */
-.card:focus-within .media-container {
 }
 
-.media:focus-within .media-container {
+.card:focus {
+    outline: none;
+    border: none;
+}
+.card:focus,
+header a:focus-within .logo {
     border: 1px solid #901c1c;
 }
+
 .logo {
     height: 50px;
+    width: 200px;
     margin-left: 100px;
 }
 

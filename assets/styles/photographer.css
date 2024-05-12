@@ -293,14 +293,25 @@ footer {
     margin: 0;
 }
 .btn-like {
-    /* position: absolute; */
-    /* z-index: 5; */
     cursor: pointer;
-    /* width: 100%; */
-    /* height: calc(100% - 71px); */
     background: transparent;
     border: none;
     outline: none;
     padding: 0;
     margin: 0;
+}
+.media:focus-within .btn-like:focus {
+    border: 1px solid #901c1c;
+}
+.button_card:focus {
+    border: 1px solid #901c1c;
+}
+/* .custom-select:focus {
+    border: 1px solid black;
+} */
+.contact_button:focus,
+.select-value:focus,
+.custom-select:focus {
+    color: #000000;
+    background: #db8876;
 }

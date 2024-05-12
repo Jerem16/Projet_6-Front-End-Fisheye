@@ -24,18 +24,16 @@ export default class DisplayMediaTemplate extends MediaElement {
             <h3 class="media-title">${title}</h3>
             <div class="nb-like">
                 <p>${likes}</p>
-                <button 
-                    type="button" 
-                    class="btn-like" 
-                    tabindex="0" 
-                    aria-label="like it"
-                >
+
                     <img 
                         src="./assets/images/icons/heart.svg" 
                         alt="like" 
                         data-liked="false"
+                        tabindex="0"
+                        class="btn-like" 
+                        aria-label="like it"
                     />
-                </button>
+              
             </div>
         `;
         return mediaTitle;
@@ -46,8 +44,11 @@ export default class DisplayMediaTemplate extends MediaElement {
         const panel = document.createElement("article");
         panel.classList.add("media");
         panel.innerHTML = `
-        <button  type="button" data-media="${id}" class="button_card" tabindex="0" aria-label="link to ${title}">
-        </button>
+        <button  
+            type="button" data-media="${id}" 
+            class="button_card" 
+            tabindex="0" 
+            aria-label="link to ${title}"></button>
     `;
         panel.appendChild(
             this.mediaElement.createElement(
@@ -69,10 +70,21 @@ export default class DisplayMediaTemplate extends MediaElement {
                 this.handleLike(event.target);
             });
         });
+        likeButtons.forEach((likeButton) => {
+            likeButton.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    this.handleLike(event.target);
+                }
+            });
+        });
 
         return panel;
     }
-
+    handleKeyDown(event) {
+        if (event.key === "Enter") {
+            this.handleLike(button);
+        }
+    }
     handleLike(button) {
         const nbLikeContainer = button
             .closest(".media")

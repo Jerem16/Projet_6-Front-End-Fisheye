@@ -31,6 +31,8 @@ export class FilterableMedia extends SortMedia {
     }
 
     handleSelectToggle(event) {
+        console.log("handleSelectToggle");
+
         event.stopPropagation();
         this.selectItems.classList.remove("hide-start");
         this.selectItems.classList.toggle("active");
@@ -40,14 +42,20 @@ export class FilterableMedia extends SortMedia {
 
     handleDocumentClick(event) {
         event.stopPropagation();
+        console.log("handleDocumentClick");
         const activeItem = this.selectContainer.querySelector(".active");
         if (!event.target.closest(".custom-select") && activeItem) {
             this.selectItems.classList.remove("active");
             this.arrow.classList.remove("down-arrow");
         }
+        const selectValues = document.querySelectorAll(".correct");
+        selectValues.forEach((selectValue) => {
+            selectValue.removeAttribute("tabindex");
+        });
     }
 
     handleItemClick(event) {
+        console.log("handleItemClick");
         event.stopPropagation();
         if (event?.target?.tagName === "DIV") {
             const filterValue = this.selectValue.getAttribute("data-filter");
@@ -64,21 +72,30 @@ export class FilterableMedia extends SortMedia {
             this.closeKeyMenu(event);
             this.arrow.classList.toggle("down-arrow");
             this.selectContainer.setAttribute("aria-expanded", false);
-
             this.updateMedia();
         }
     }
 
     handleKeyDown(event) {
+        const selectValues = document.querySelectorAll(".correct");
+        selectValues.forEach((selectValue) => {
+            selectValue.setAttribute("tabindex", "0");
+        });
         if (event.key === "Enter") {
             this.handleItemClick(event);
         }
     }
+
     closeKeyMenu() {
+        console.log("closeKeyMenu");
+        const selectValues = document.querySelectorAll(".correct");
+        selectValues.forEach((selectValue) => {
+            selectValue.removeAttribute("tabindex");
+        });
         const ariaExpandedValue =
             this.selectContainer.getAttribute("aria-expanded");
         if (ariaExpandedValue === "true") {
-            this.selectItems.classList.toggle("active");
+            this.selectItems.classList.remove("active");
         }
     }
     async updateMedia() {
