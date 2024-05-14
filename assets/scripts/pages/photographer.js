@@ -17,7 +17,7 @@ import {
 const params = new URL(location.href).searchParams;
 const photographerId = Number(params.get("id"));
 
-const indexParams = params.get("mediaID");
+const indexParams = params.get("mediaIinex");
 const mediaIndex = indexParams;
 
 const photographersSection = document.querySelector("main");
@@ -45,8 +45,8 @@ async function displayData(photographer, nbLikes) {
     const footerRender = footer.displayFooterCardDOM();
 
     if (mediaIndex) {
-        const mediaID = new SortMedia();
-        const mediaData1 = await mediaID.sortAllMediaByFilter();
+        const mediaIinex = new SortMedia();
+        const mediaData1 = await mediaIinex.sortAllMediaByFilter();
         const modalMedia = new ModalMedia(mediaData1, Number(mediaIndex));
         const modalMediaRender = modalMedia.renderModal(
             "media-container",

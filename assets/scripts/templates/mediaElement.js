@@ -61,7 +61,6 @@ class ImageElement {
         return imageContainer;
     }
 }
-
 class VideoElement {
     constructor(data) {
         this.data = data;
@@ -69,24 +68,38 @@ class VideoElement {
 
     createElement(className, thumbnails) {
         const { title, photographerId, video, id } = this.data;
-        let imagePath = `./assets/images/photo/${photographerId}/${video}`;
+        let imagePath = `./assets/images/photo/${photographerId}/`;
 
         const videoContainer = document.createElement("div");
         videoContainer.classList.add(className);
-        videoContainer.innerHTML = `
-            <video
-                data-media="${id}"
-                src="${imagePath}"
-                controls
-            >
-                <track
-                    src="./assets/subtitles/subtitles.vtt"
-                    label="${title}"
-                    srclang="fr"
-                    label="French"
-                />
-            </video>
-        `;
+
+        if (thumbnails) {
+            imagePath += `thumbnails/thumb-${id}.webp`;
+
+            videoContainer.innerHTML = `
+                <img 
+                    src="${imagePath}"
+                    alt="${title}"
+                    data-media="${id}"
+                />`;
+        } else {
+            imagePath += video;
+            videoContainer.innerHTML = `
+                <video
+                    data-media="${id}"
+                    src="${imagePath}"
+                    controls
+                >
+                    <track
+                        src="./assets/subtitles/subtitles.vtt"
+                        label="${title}"
+                        srclang="fr"
+                        label="French"
+                    />
+                </video>
+            `;
+        }
+
         return videoContainer;
     }
 }

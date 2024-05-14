@@ -3,8 +3,8 @@ import { SortMedia } from "../utils/sortFunctions.js";
 import { addURLParameter, removeURLParameter } from "../utils/urlUtils.js";
 
 async function getAllMedia() {
-    const mediaID = new SortMedia();
-    const mediaData = await mediaID.sortAllMediaByFilter();
+    const mediaIinex = new SortMedia();
+    const mediaData = await mediaIinex.sortAllMediaByFilter();
     return mediaData;
 }
 
@@ -58,7 +58,7 @@ export default class ModalMedia extends MediaElement {
         const nextData = allMedia[nextIndex];
         this.currentIndex = nextIndex;
         this.data = nextData;
-        addURLParameter("mediaID", nextIndex);
+        addURLParameter("mediaIinex", nextIndex);
         this.updateImage(nextData);
     }
 
@@ -85,7 +85,7 @@ export default class ModalMedia extends MediaElement {
         sliderContent.appendChild(media.createElement(className));
 
         closeButton.addEventListener("click", () => {
-            removeURLParameter("mediaID");
+            removeURLParameter("mediaIinex");
             this.closeModal(cssIdName);
             const modalMediaElement = document.getElementById(cssIdName);
             if (modalMediaElement) {

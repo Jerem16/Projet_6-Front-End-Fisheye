@@ -303,9 +303,10 @@ footer {
 .media:focus-within .btn-like:focus {
     border: 1px solid #901c1c;
 }
-.button_card:focus {
-    border: 2px solid #901c1c;
-    width: 100%;
+.button_card:focus, .button_card:hover {
+    border: 3px solid #901c1c;
+    border-radius: 5px;
+    width: 350px;
 }
 .custom-select:focus {
     border: 1px solid black;

@@ -12,7 +12,7 @@ export default class DisplayMediaTemplate extends MediaElement {
         this.mediaElement = new MediaElement(data);
         this.thumbnails = true;
         this.params = new URL(location.href).searchParams;
-        this.mediaId = Number(this.params.get("mediaID"));
+        this.mediaIinex = Number(this.params.get("mediaIinex"));
         this.price = price;
     }
 
@@ -24,7 +24,6 @@ export default class DisplayMediaTemplate extends MediaElement {
             <h3 class="media-title">${title}</h3>
             <div class="nb-like">
                 <p>${likes}</p>
-
                     <img 
                         src="./assets/images/icons/heart.svg" 
                         alt="like" 
@@ -33,7 +32,6 @@ export default class DisplayMediaTemplate extends MediaElement {
                         class="btn-like" 
                         aria-label="like it"
                     />
-              
             </div>
         `;
         return mediaTitle;
@@ -113,7 +111,7 @@ export default class DisplayMediaTemplate extends MediaElement {
     async openMediaModal(cssIdName) {
         const index = this.data.id;
         const mediaIndex = await getMediaIndex(index);
-        addURLParameter("mediaID", mediaIndex);
+        addURLParameter("mediaIinex", mediaIndex);
         this.renderMediaModalIndex(cssIdName, mediaIndex);
     }
 
@@ -125,12 +123,12 @@ export default class DisplayMediaTemplate extends MediaElement {
 }
 
 async function getAllMedia() {
-    const mediaID = new SortMedia();
-    const mediaData = await mediaID.sortAllMediaByFilter();
+    const mediaIinex = new SortMedia();
+    const mediaData = await mediaIinex.sortAllMediaByFilter();
     return mediaData;
 }
 async function getMediaIndex(id) {
-    const mediaID = new SortMedia();
-    const mediaData = await mediaID.sortAllMediaByFilter(id);
+    const mediaIinex = new SortMedia();
+    const mediaData = await mediaIinex.sortAllMediaByFilter(id);
     return mediaData.findIndex((media) => media.id === id);
 }
