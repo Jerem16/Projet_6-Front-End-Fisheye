@@ -304,14 +304,15 @@ footer {
     border: 1px solid #901c1c;
 }
 .button_card:focus {
-    border: 1px solid #901c1c;
+    border: 2px solid #901c1c;
+    width: 100%;
 }
-/* .custom-select:focus {
+.custom-select:focus {
     border: 1px solid black;
-} */
+}
 .contact_button:focus,
 .select-value:focus,
-.custom-select:focus {
+.select-value.correct:hover {
     color: #000000;
     background: #db8876;
 }

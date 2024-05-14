@@ -1,14 +1,11 @@
 // photographer.js
 import photographHeadTemplate from "../templates/mediaHeader.js";
-import {
-    GetPhotographers,
-    GetMedia,
-    likesCalculator,
-    SortMedia,
-} from "../api/Api.js";
+import { GetPhotographers, GetMedia } from "../api/Api.js";
+import { likesCalculator, SortMedia } from "../utils/sortFunctions.js";
 import { FilterableMedia } from "../utils/menuSelected.js";
 import { DisplayMediaMenu } from "../templates/mediaMenu.js";
 import DisplayMediaTemplate from "../templates/mediaCardsElements.js";
+import { KeyboardNavigation } from "../utils/arrowNav.js";
 import FooterTemplate from "../templates/mediaFooterInfo.js";
 import ModalForm from "../templates/modalForm.js";
 import ModalMedia from "../templates/mediaModal.js";
@@ -21,7 +18,6 @@ const params = new URL(location.href).searchParams;
 const photographerId = Number(params.get("id"));
 
 const indexParams = params.get("mediaID");
-let likeParams = Number(params.get("like"));
 const mediaIndex = indexParams;
 
 const photographersSection = document.querySelector("main");
@@ -31,7 +27,7 @@ const api = new GetPhotographers();
 const media = new GetMedia();
 
 const imageUrls = [];
-async function displayData(photographer, mediaData, nbLikes, newLikeParams) {
+async function displayData(photographer, nbLikes) {
     const photographerModel = new photographHeadTemplate(photographer);
     const headerCardDOM = photographerModel.getHeaderCardDOM("contact_modal");
 
@@ -47,9 +43,6 @@ async function displayData(photographer, mediaData, nbLikes, newLikeParams) {
 
     const footer = new FooterTemplate(photographer.price, nbLikes);
     const footerRender = footer.displayFooterCardDOM();
-
-
-
 
     if (mediaIndex) {
         const mediaID = new SortMedia();
@@ -75,10 +68,8 @@ async function init() {
         const photographer = await api.getPhotographerById(photographerId);
         const mediaData = await media.getAllMediaById(photographerId);
         const nbLikes = likesCalculator(mediaData);
-        // const newLikeParams = nbLikes + likeParams;
-        // likeParams = newLikeParams;
 
-        displayData(photographer, mediaData, nbLikes);
+        displayData(photographer, nbLikes);
         preloadMedia(mediaData);
     }
 }
@@ -88,13 +79,16 @@ init();
 export async function displayMedia(mediaData) {
     const panel = document.querySelector(".panel");
     mediaData.forEach((media, thumbnails) => {
-        const DisplayMedia = new DisplayMediaTemplate(media, thumbnails);
-        const mediaCardDOM = DisplayMedia.getMediaCardDOM(
+        const displayMedia = new DisplayMediaTemplate(media, thumbnails);
+        const mediaCardDOM = displayMedia.getMediaCardDOM(
             "media-container",
             "modal_media"
         );
         panel.append(mediaCardDOM);
     });
+    const links = ".button_card";
+    const keyboardListeners = new KeyboardNavigation(links);
+    keyboardListeners.keyListeners();
 }
 
 export async function displayMediaModal(array, index) {

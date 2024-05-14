@@ -1,4 +1,4 @@
-import { SortMedia } from "../api/Api.js";
+import { SortMedia } from "../utils/sortFunctions.js";
 import { displayMedia } from "../pages/photographer.js";
 import { addURLParameter } from "../utils/urlUtils.js";
 
@@ -81,8 +81,18 @@ export class FilterableMedia extends SortMedia {
         selectValues.forEach((selectValue) => {
             selectValue.setAttribute("tabindex", "0");
         });
+
         if (event.key === "Enter") {
-            this.handleItemClick(event);
+            this.selectItems.classList.toggle("active");
+            selectValues.forEach((selectValue) => {
+                if (
+                    event.target === selectValue &&
+                    selectValue.getAttribute("tabindex") === "0"
+                ) {
+                    console.log("active");
+                    this.handleItemClick(event);
+                }
+            });
         }
     }
 

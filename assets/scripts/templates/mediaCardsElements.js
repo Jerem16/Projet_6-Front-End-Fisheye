@@ -1,6 +1,6 @@
 //photographer-media.js
 import MediaElement from "./mediaElement.js";
-import { SortMedia } from "../api/Api.js";
+import { SortMedia } from "../utils/sortFunctions.js";
 import { displayMediaModal } from "../pages/photographer.js";
 import { addURLParameter } from "../utils/urlUtils.js";
 
@@ -45,7 +45,8 @@ export default class DisplayMediaTemplate extends MediaElement {
         panel.classList.add("media");
         panel.innerHTML = `
         <button  
-            type="button" data-media="${id}" 
+            type="button" 
+            data-media="${id}" 
             class="button_card" 
             tabindex="0" 
             aria-label="link to ${title}"></button>

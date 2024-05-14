@@ -1,6 +1,3 @@
-// mediaMenu.js
-import { FilterableMedia } from "../utils/menuSelected.js";
-
 const dataMenu = [
     { value: "likes", text: "Popularité" },
     { value: "date", text: "Date" },
@@ -12,7 +9,6 @@ export class DisplayMediaMenu {
         const params = new URL(location.href).searchParams;
         const mediaFilter = params.get("mediaFilter");
         const valueFilter = params.get("valueFilter");
-        // this.filterableMedia = new FilterableMedia();
 
         if (mediaFilter && valueFilter) {
             const filterIndex = dataMenu.findIndex(
@@ -31,7 +27,8 @@ export class DisplayMediaMenu {
         sectionMenu.innerHTML = `
             <h2 class="hide-title">Medias panel</h2>
             <span class="sort-media">Trier par</span>
-            <button
+            <div
+                role="listbox"
                 class="btn custom-select"
                 aria-haspopup="listbox"
                 aria-expanded="false"
@@ -39,12 +36,13 @@ export class DisplayMediaMenu {
                 tabindex="0"
             >
                 <div
-                    class="select-selected select-value"
-                    role="button"
+                    class="select-selected select-value"     
                 >
                     <span 
                         data-filter="${dataMenu[0].value}"
                         aria-selected="true"
+                        aria-checked="true"
+                        role="option"
                     >
                         ${dataMenu[0].text}
                     </span>
@@ -56,8 +54,6 @@ export class DisplayMediaMenu {
                 </div>
                 <div
                     class="hide-start select-items"
-                    role="listbox"
-                    aria-labelledby="sortButton"
                 >
                     <div 
                         role="option"
@@ -75,7 +71,7 @@ export class DisplayMediaMenu {
                         ${dataMenu[2].text}
                     </div>
                 </div>
-            </button>
+            </div>
             <div class="panel"></div>
         `;
 

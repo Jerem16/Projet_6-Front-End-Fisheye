@@ -1,5 +1,5 @@
 import MediaElement from "./mediaElement.js";
-import { SortMedia } from "../api/Api.js";
+import { SortMedia } from "../utils/sortFunctions.js";
 import { addURLParameter, removeURLParameter } from "../utils/urlUtils.js";
 
 async function getAllMedia() {
@@ -135,9 +135,6 @@ window.addEventListener("keydown", async (event) => {
         const closeButton = document.querySelector(".modal .closeButton");
         const closeMediaButton = document.querySelector(
             ".media-slider .closeButton"
-        );
-        const closeMenuButton = document.querySelector(
-            ".panel-photo .custom-select"
         );
         if (closeButton) {
             closeButton.click();
