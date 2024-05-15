@@ -12,7 +12,7 @@ export default class DisplayMediaTemplate extends MediaElement {
         this.mediaElement = new MediaElement(data);
         this.thumbnails = true;
         this.params = new URL(location.href).searchParams;
-        this.mediaIinex = Number(this.params.get("mediaIinex"));
+        this.indexMedia = Number(this.params.get("indexMedia"));
         this.price = price;
     }
 
@@ -68,15 +68,17 @@ export default class DisplayMediaTemplate extends MediaElement {
             likeButton.addEventListener("click", (event) => {
                 this.handleLike(event.target);
             });
-        });
-        likeButtons.forEach((likeButton) => {
             likeButton.addEventListener("keydown", (event) => {
                 if (event.key === "Enter") {
-                    this.handleLike(event.target);
+                    const clickEvent = new MouseEvent("click", {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window,
+                    });
+                    event.target.dispatchEvent(clickEvent);
                 }
             });
         });
-
         return panel;
     }
     handleKeyDown(event) {
@@ -109,9 +111,9 @@ export default class DisplayMediaTemplate extends MediaElement {
         }
     }
     async openMediaModal(cssIdName) {
-        const index = this.data.id;
-        const mediaIndex = await getMediaIndex(index);
-        addURLParameter("mediaIinex", mediaIndex);
+        const id = this.data.id;
+        const mediaIndex = await getMediaIndex(id);
+        addURLParameter("indexMedia", mediaIndex);
         this.renderMediaModalIndex(cssIdName, mediaIndex);
     }
 
@@ -123,12 +125,12 @@ export default class DisplayMediaTemplate extends MediaElement {
 }
 
 async function getAllMedia() {
-    const mediaIinex = new SortMedia();
-    const mediaData = await mediaIinex.sortAllMediaByFilter();
+    const indexMedia = new SortMedia();
+    const mediaData = await indexMedia.sortAllMediaByFilter();
     return mediaData;
 }
 async function getMediaIndex(id) {
-    const mediaIinex = new SortMedia();
-    const mediaData = await mediaIinex.sortAllMediaByFilter(id);
+    const indexMedia = new SortMedia();
+    const mediaData = await indexMedia.sortAllMediaByFilter(id);
     return mediaData.findIndex((media) => media.id === id);
 }

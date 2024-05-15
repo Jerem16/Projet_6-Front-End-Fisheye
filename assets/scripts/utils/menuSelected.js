@@ -31,8 +31,6 @@ export class FilterableMedia extends SortMedia {
     }
 
     handleSelectToggle(event) {
-        console.log("handleSelectToggle");
-
         event.stopPropagation();
         this.selectItems.classList.remove("hide-start");
         this.selectItems.classList.toggle("active");
@@ -42,7 +40,6 @@ export class FilterableMedia extends SortMedia {
 
     handleDocumentClick(event) {
         event.stopPropagation();
-        console.log("handleDocumentClick");
         const activeItem = this.selectContainer.querySelector(".active");
         if (!event.target.closest(".custom-select") && activeItem) {
             this.selectItems.classList.remove("active");
@@ -55,25 +52,22 @@ export class FilterableMedia extends SortMedia {
     }
 
     handleItemClick(event) {
-        console.log("handleItemClick");
         event.stopPropagation();
-        if (event?.target?.tagName === "DIV") {
-            const filterValue = this.selectValue.getAttribute("data-filter");
-            const currentText = this.selectValue.textContent;
-            this.selectValue.setAttribute(
-                "data-filter",
-                event.target.getAttribute("data-filter")
-            );
-            event.target.setAttribute("data-filter", filterValue);
+        const filterValue = this.selectValue.getAttribute("data-filter");
+        const currentText = this.selectValue.textContent;
+        this.selectValue.setAttribute(
+            "data-filter",
+            event.target.getAttribute("data-filter")
+        );
+        event.target.setAttribute("data-filter", filterValue);
 
-            this.selectValue.textContent = event.target.textContent;
-            event.target.textContent = currentText;
-            this.selectItems.classList.remove("active");
-            this.closeKeyMenu(event);
-            this.arrow.classList.toggle("down-arrow");
-            this.selectContainer.setAttribute("aria-expanded", false);
-            this.updateMedia();
-        }
+        this.selectValue.textContent = event.target.textContent;
+        event.target.textContent = currentText;
+        this.selectItems.classList.remove("active");
+        this.closeKeyMenu(event);
+        this.arrow.classList.toggle("down-arrow");
+        this.selectContainer.setAttribute("aria-expanded", false);
+        this.updateMedia();
     }
 
     handleKeyDown(event) {
@@ -89,7 +83,6 @@ export class FilterableMedia extends SortMedia {
                     event.target === selectValue &&
                     selectValue.getAttribute("tabindex") === "0"
                 ) {
-                    console.log("active");
                     this.handleItemClick(event);
                 }
             });
@@ -97,7 +90,6 @@ export class FilterableMedia extends SortMedia {
     }
 
     closeKeyMenu() {
-        console.log("closeKeyMenu");
         const selectValues = document.querySelectorAll(".correct");
         selectValues.forEach((selectValue) => {
             selectValue.removeAttribute("tabindex");

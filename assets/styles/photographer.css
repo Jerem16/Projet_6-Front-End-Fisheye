@@ -198,6 +198,11 @@ h3.media-title span p {
     background-repeat: no-repeat;
     background-position: center center;
 }
+.nb-like,
+.title-inline {
+    display: inline-flex;
+    flex-flow: row nowrap;
+}
 .media-container img,
 .media-container video {
     position: relative;
@@ -210,8 +215,6 @@ h3.media-title span p {
     object-fit: cover;
 }
 .title-inline {
-    display: inline-flex;
-    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -228,8 +231,6 @@ h3.media-title span p {
     text-overflow: ellipsis;
 }
 .nb-like {
-    display: inline-flex;
-    flex-flow: row nowrap;
     justify-content: flex-end;
     align-items: center;
     width: 100px;
@@ -257,11 +258,20 @@ footer {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 30px 0px 30px;
+    padding: 0 30px;
+}
+.btn-like,
+.button_card {
+    cursor: pointer;
+    background: 0 0;
+    border: none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
 }
 .info .nb-like p,
 .info .trj {
-    color: black;
+    color: #000;
     font-size: 24px;
     line-height: normal;
     font-weight: 500;
@@ -283,38 +293,33 @@ footer {
 .button_card {
     position: absolute;
     z-index: 5;
-    cursor: pointer;
     width: 100%;
     height: calc(100% - 71px);
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-}
-.btn-like {
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
 }
 .media:focus-within .btn-like:focus {
     border: 1px solid #901c1c;
 }
-.button_card:focus, .button_card:hover {
-    border: 3px solid #901c1c;
-    border-radius: 5px;
+.button_card:focus,
+.button_card:hover {
+    border: 3px solid #fafafa;
+    border-radius: 2.5px;
     width: 350px;
     box-sizing: border-box;
 }
-.custom-select:focus {
-    border: 1px solid black;
+.custom-select:focus-within {
+    border: 1px solid #000;
+}
+.custom-select:focus-within .active {
+    border: 1px solid #000;
+    border-top: 0 solid #000;
+    left: -1px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+        0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 .contact_button:focus,
-.select-value:focus,
-.select-value.correct:hover {
-    color: #000000;
+.contact_button:hover,
+.select-value.correct:hover,
+.select-value:focus {
+    color: #000;
     background: #db8876;
 }
