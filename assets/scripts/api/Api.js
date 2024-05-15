@@ -1,4 +1,3 @@
-// Api.js
 class Api {
     /**
      * @param {string} url

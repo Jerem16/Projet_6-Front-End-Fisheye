@@ -48,7 +48,6 @@ class ImageElement {
         } else {
             imagePath += image;
         }
-        // imagePath = `./assets/images/photo/${photographerId}/${image}`;
         const imageContainer = document.createElement("div");
         imageContainer.classList.add(className);
         imageContainer.innerHTML = `

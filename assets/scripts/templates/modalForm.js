@@ -89,7 +89,7 @@ class ModalForm extends Modal {
         const lastNameError = document.querySelector(
             ".lastName[data-error-visible]"
         );
-        const regexNumber = /[0-9]/;
+        const regexNumber = /'\d'/;
         const regexSans = /^[]+$/;
         const emailInput = document.getElementById("email");
         const emailError = document.querySelector(".email[data-error-visible]");

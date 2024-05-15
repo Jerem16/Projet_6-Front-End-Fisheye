@@ -1,4 +1,3 @@
-// photographer.js
 import photographHeadTemplate from "../templates/mediaHeader.js";
 import { GetPhotographers, GetMedia } from "../api/Api.js";
 import { likesCalculator, SortMedia } from "../utils/sortFunctions.js";

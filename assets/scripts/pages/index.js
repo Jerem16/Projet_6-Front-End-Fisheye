@@ -1,4 +1,3 @@
-// index.js
 import { GetPhotographers } from "../api/Api.js";
 import PhotographerTemplate from "../templates/photographersCards.js";
 import { KeyboardNavigation } from "../utils/arrowNav.js";

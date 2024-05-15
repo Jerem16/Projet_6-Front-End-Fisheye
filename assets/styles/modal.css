@@ -171,9 +171,25 @@ header button {
     width: 96px;
     height: 96px;
 }
-.slider-arrows .arrow:focus,
-.closeButton:focus {
-    border: 1px solid #000;
+.slider-arrows .arrow:focus {
+    border: 1px solid #901c1c;
+}
+
+.media-slider .closeButton:focus {
+    box-sizing: border-box;
+    border: 1px solid #901c1c;
+    /* max-width: calc(50px);
+    max-height: calc(50px); */
+}
+header .closeButton:focus img {
+    box-sizing: border-box;
+    border: 1px solid #901c1c;
+    max-width: calc(48px);
+    max-height: calc(48px);
+    position: relative;
+    top: 2px;
+    transform: rotate(180deg);
+    transition: all ease 0.3s;
 }
 .slider-arrows .arrow {
     position: relative;

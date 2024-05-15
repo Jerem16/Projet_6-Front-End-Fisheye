@@ -1,4 +1,3 @@
-//photographer-media.js
 import MediaElement from "./mediaElement.js";
 import { SortMedia } from "../utils/sortFunctions.js";
 import { displayMediaModal } from "../pages/photographer.js";
@@ -81,11 +80,7 @@ export default class DisplayMediaTemplate extends MediaElement {
         });
         return panel;
     }
-    handleKeyDown(event) {
-        if (event.key === "Enter") {
-            this.handleLike(button);
-        }
-    }
+
     handleLike(button) {
         const nbLikeContainer = button
             .closest(".media")

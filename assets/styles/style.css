@@ -49,10 +49,14 @@ img:hover {
     transition: 0.3s ease-in-out;
     transform: scale(115%);
 }
+#carroussel img:focus,
+#carroussel img:hover {
+    transform: scale(100%);
+}
 .card:focus,
 a.card:hover {
     width: 110%;
-    height: 110%;
+    height: 110%;   
     top: -5%;
     left: -5%;
     border-radius: 5px;
