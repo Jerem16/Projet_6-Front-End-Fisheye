@@ -23,14 +23,19 @@
     </head>
     <body>
         <template id="modal_Form">
-            <div id="contact_modal">
-                <div class="modal">
+            <div id="contact_modal" aria-hidden="true">
+                <div class="modal" role="form" tabindex="0">
                     <header>
                         <h2>Contactez-moi</h2>
-                        <button class="closeButton" type="button" tabindex="0">
+                        <button
+                            class="closeButton"
+                            type="button"
+                            tabindex="0"
+                            aria-label="Taper echape pour fermer la modal"
+                        >
                             <img
                                 src="./assets/images/icons/close.svg"
-                                alt="close"
+                                alt="Image pour le bouton fermer la modal"
                             />
                         </button>
 
@@ -43,7 +48,6 @@
                             data-error="Veuillez entrer votre prénom, minimum 2 caractères"
                         >
                             <label for="firstName">Prénom</label>
-
                             <input
                                 class="text-control"
                                 type="text"

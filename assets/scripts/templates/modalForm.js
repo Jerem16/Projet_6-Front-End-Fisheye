@@ -18,6 +18,8 @@ class ModalForm extends Modal {
         const name = this.data.name;
         const templateForm = await this.loadTemplate();
         const form = document.importNode(templateForm.content, true);
+        const modal = form.getElementById("contact_modal");
+
         const headerName = form.querySelector(".name");
         headerName.textContent = name;
 
@@ -25,9 +27,15 @@ class ModalForm extends Modal {
         closeButton.addEventListener("click", () => this.closeModal(cssIdName));
 
         const contactForm = form.getElementById("contactMessage");
-
+        modal.setAttribute("aria-hidden", false);
         contactForm.addEventListener("submit", (event) => {
             event.preventDefault();
+            const firstFocusableElement = modal.querySelector(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            if (firstFocusableElement) {
+                firstFocusableElement.focus();
+            }
             if (this.validate()) {
                 const formData = new FormData(event.target);
                 for (const entry of formData.entries()) {
@@ -41,23 +49,29 @@ class ModalForm extends Modal {
     }
 
     validateName(inputVerification, printError, regexNumber, nb) {
+        const errorMessage = printError.getAttribute("data-error");
+
         if (
             inputVerification.value.length < nb ||
             regexNumber.test(inputVerification.value)
         ) {
             printError.setAttribute("data-error-visible", "true");
+            inputVerification.setAttribute("aria-label", errorMessage);
         } else {
             printError.setAttribute("data-error-visible", "false");
         }
-        inputVerification.addEventListener("change", () => {
-            this.validateName(inputVerification, printError, regexNumber);
+
+        inputVerification.addEventListener("input", () => {
+            this.validateName(inputVerification, printError, regexNumber, nb);
         });
     }
 
     validateEmail(inputVerification, printError) {
+        const errorMessage = printError.getAttribute("data-error");
         let emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegExp.test(inputVerification.value)) {
             printError.setAttribute("data-error-visible", "true");
+            inputVerification.setAttribute("aria-label", errorMessage);
         } else {
             printError.setAttribute("data-error-visible", "false");
         }

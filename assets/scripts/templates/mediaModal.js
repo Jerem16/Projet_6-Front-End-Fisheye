@@ -21,6 +21,7 @@ export default class ModalMedia extends MediaElement {
         closeButton.classList.add("closeButton");
         closeButton.setAttribute("type", "button");
         closeButton.setAttribute("tabindex", "0");
+        closeButton.setAttribute("aria-label", "Fermer la modal");
         closeButton.innerHTML = `
         <img src="./assets/images/icons/closeMedia.svg" alt="close button">
         `;
@@ -37,11 +38,13 @@ export default class ModalMedia extends MediaElement {
         const sliderArrows = document.createElement("div");
         sliderArrows.classList.add("slider-arrows");
         sliderArrows.innerHTML = `
-            <img class="arrow arrow_left" src="./assets/images/icons/arrow.svg" alt="arrow_left" />
-            <img class="arrow arrow_right" src="./assets/images/icons/arrow.svg" alt="arrow_right" />
+            <img class="arrow arrow_left" src="./assets/images/icons/arrow.svg" alt="Flèche pour l'image précédente" />
+            <img class="arrow arrow_right" src="./assets/images/icons/arrowRight.svg" alt="Flèche pour l'image suivante" />
         `;
+
         return sliderArrows;
     }
+
     updateImage(newData) {
         const slider = document.getElementById("carroussel");
         slider.innerHTML = `        

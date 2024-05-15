@@ -171,9 +171,15 @@ header button {
     width: 96px;
     height: 96px;
 }
-.arrow_right {
-    transform: rotate(180deg);
+.slider-arrows .arrow:focus,
+.closeButton:focus {
+    border: 1px solid #000;
 }
+.slider-arrows .arrow {
+    position: relative;
+    z-index: 1000;
+}
+
 .formData[data-error-visible="true"]::after,
 .message[data-error-visible="true"]::after {
     content: attr(data-error);

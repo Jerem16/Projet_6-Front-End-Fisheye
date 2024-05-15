@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="./assets/styles/modal.css" />
     </head>
     <body>
-        <header>
+        <header aria-hidden="false">
             <a href="index.html">
                 <img
                     src="./assets/images/logo.png"
@@ -35,7 +35,7 @@
                     alt="logo du site fisheye"
             /></a>
         </header>
-        <main id="main">
+        <main id="main" aria-hidden="false">
             <section class="photograph-header">
                 <div class="header-segment">
                     <div class="photograph-info"></div>
@@ -46,6 +46,7 @@
                         class="btn contact_button"
                         tabindex="0"
                         aria-label="Lien vers le formulaire de contact"
+                        aria-describedby=""
                     >
                         Contactez-moi
                     </button>
@@ -55,7 +56,7 @@
                 </div>
             </section>
         </main>
-        <footer>
+        <footer aria-hidden="false">
             <div class="info"></div>
         </footer>
         <template id="media">
