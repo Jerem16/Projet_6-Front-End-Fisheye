@@ -43,6 +43,7 @@ export class DisplayMediaMenu {
                         aria-selected="true"
                         aria-checked="true"
                         role="option"
+                        aria-label="Travaux trié par ${dataMenu[0].text}"
                     >
                         ${dataMenu[0].text}
                     </span>
@@ -60,13 +61,16 @@ export class DisplayMediaMenu {
                         aria-selected="false"
                         data-filter="${dataMenu[1].value}" 
                         class="select-value correct"
+                        aria-label="Sélèctionne le tri par ${dataMenu[1].text}"
                     >
                         ${dataMenu[1].text}
                     </div>
                     <div 
                         role="option"
                         aria-selected="false"
-                        data-filter="${dataMenu[2].value}" class="select-value correct"
+                        data-filter="${dataMenu[2].value}"
+                        class="select-value correct"
+                        aria-label="Sélèctionne le tri par ${dataMenu[2].text}"
                     >
                         ${dataMenu[2].text}
                     </div>

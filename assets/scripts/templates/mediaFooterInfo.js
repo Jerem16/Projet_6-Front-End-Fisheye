@@ -4,18 +4,6 @@ export default class FooterTemplate {
         this.like = likes;
     }
 
-    creatLikeSection() {
-        const likeSection = document.createElement("div");
-        likeSection.classList.add("nb-like");
-        likeSection.innerHTML = `
-            <p>${this.like}</p>
-            <img
-                src="./assets/images/icons/heartBlack.svg"
-                alt="like"
-            />
-        `;
-    }
-
     displayFooterCardDOM() {
         const footer = document.querySelector("footer .info");
         footer.innerHTML = `
@@ -23,10 +11,10 @@ export default class FooterTemplate {
             <p>${this.like}</p>
             <img
                 src="./assets/images/icons/heartBlack.svg"
-                alt="like"
+                alt="il y a : ${this.like} like sur l'image"
             />
         </div>
-        <p class="trj">${this.trj} / jour</p>
+            <p class="trj">${this.trj} / jour</p>
         `;
         return footer;
     }

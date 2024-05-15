@@ -30,7 +30,7 @@ export default class PhotographerTemplate {
                 href="./photographer.html?id=${id}" 
                 tabindex="0"
             >
-                link to ${name}
+                lien vers la page du photographe : ${name}
             </a>
         `;
 

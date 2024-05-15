@@ -307,6 +307,7 @@ footer {
     border: 3px solid #901c1c;
     border-radius: 5px;
     width: 350px;
+    box-sizing: border-box;
 }
 .custom-select:focus {
     border: 1px solid black;

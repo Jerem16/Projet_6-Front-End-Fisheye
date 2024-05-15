@@ -26,11 +26,10 @@ export default class DisplayMediaTemplate extends MediaElement {
                 <p>${likes}</p>
                     <img 
                         src="./assets/images/icons/heart.svg" 
-                        alt="like" 
+                        alt="like, click sur le coeur pour ajouter un like"
                         data-liked="false"
                         tabindex="0"
                         class="btn-like" 
-                        aria-label="like it"
                     />
             </div>
         `;
@@ -42,12 +41,13 @@ export default class DisplayMediaTemplate extends MediaElement {
         const panel = document.createElement("article");
         panel.classList.add("media");
         panel.innerHTML = `
-        <button  
-            type="button" 
+        <button
             data-media="${id}" 
             class="button_card" 
             tabindex="0" 
-            aria-label="link to ${title}"></button>
+            aria-label="Ouvre la modal affichant l'image ${title} dans le carrousel">
+        </button>
+    
     `;
         panel.appendChild(
             this.mediaElement.createElement(
