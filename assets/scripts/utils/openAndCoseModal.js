@@ -1,5 +1,3 @@
-import { removeURLParameter } from "./urlUtils.js";
-
 export default class Modal {
     constructor() {
         this.closeModal = this.closeModal.bind(this);

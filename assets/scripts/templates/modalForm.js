@@ -90,6 +90,7 @@ class ModalForm extends Modal {
             ".lastName[data-error-visible]"
         );
         const regexNumber = /'\d'/;
+        // This empty character class is intentional and serves as a placeholder for future use.
         const regexSans = /^[]+$/;
         const emailInput = document.getElementById("email");
         const emailError = document.querySelector(".email[data-error-visible]");

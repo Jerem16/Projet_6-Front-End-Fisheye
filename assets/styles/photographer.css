@@ -210,9 +210,27 @@ h3.media-title span p {
     width: 100%;
     height: 100%;
     max-height: calc(100vh - 240px);
-    margin: 0 0 66px;
+    margin: 0;
     border-radius: 5px;
     object-fit: cover;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+        0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+.modal_media-title {
+    color: #901c1c;
+    background: #fff;
+    position: relative;
+    top: -4px;
+    margin: 12px 0 66px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.15),
+        0 1px 3px 1px rgba(60, 64, 67, 0.075);
 }
 .title-inline {
     justify-content: space-between;
@@ -323,7 +341,6 @@ footer {
     color: #000;
     background: #db8876;
 }
-
 .modal .contact_button:focus,
 .modal .contact_button:hover {
     border: 1px solid #000;

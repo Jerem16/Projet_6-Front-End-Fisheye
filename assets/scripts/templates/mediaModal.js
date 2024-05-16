@@ -44,6 +44,13 @@ export default class ModalMedia extends MediaElement {
 
         return sliderArrows;
     }
+    title(title) {
+        const modalTitle = document.createElement("h3");
+        modalTitle.classList.add("modal_media-title");
+        modalTitle.textContent = `${title}`;
+
+        return modalTitle;
+    }
 
     updateImage(newData) {
         const slider = document.getElementById("carroussel");
@@ -51,6 +58,10 @@ export default class ModalMedia extends MediaElement {
         `;
         const media = new MediaElement(newData);
         slider.appendChild(media.createElement("media-container"));
+
+        const titleContainer = document.querySelector(".modal_media-title");
+        titleContainer.textContent = `${newData.title}`;
+
         return slider;
     }
     async handleMediaChange(direction) {
@@ -79,14 +90,15 @@ export default class ModalMedia extends MediaElement {
         const sliderContent = this.sliderContent();
         const closeButton = this.closeButton();
         const sliderArrows = this.sliderArrow();
+        const title = this.title(this.currentData.title);
 
         modalPage
             .querySelector(".media-slider")
-            .append(closeButton, sliderContent, sliderArrows);
+            .append(closeButton, sliderContent, sliderArrows, title);
 
         const media = new MediaElement(this.currentData);
         sliderContent.appendChild(media.createElement(className));
-
+        console.log(this.currentData.title);
         closeButton.addEventListener("click", () => {
             removeURLParameter("indexMedia");
             this.closeModal(cssIdName);

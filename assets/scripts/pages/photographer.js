@@ -53,7 +53,6 @@ async function displayData(photographer, nbLikes) {
         );
         const modal = document.getElementById("modal_media");
         modal.style.display = "flex";
-        console.log("mediaIndex ok", mediaIndex);
         return modalMediaRender;
     }
 

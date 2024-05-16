@@ -1,9 +1,9 @@
 import Modal from "../utils/openAndCoseModal.js";
 
 class MediaFactory {
-    constructor(data) {
+    constructor(data, thumbnails) {
         this.data = data;
-        this.thumbnails;
+        this.thumbnails = thumbnails;
     }
     createMediaElement() {
         const { image, video } = this.data;
