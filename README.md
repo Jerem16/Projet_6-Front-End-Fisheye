@@ -18,7 +18,7 @@
 
 ## Utilisation
 
-Pour démarrer le serveur de développement, utilisez la commande : npm start
+Pour démarrer le serveur de développement, utilisez la commande : Yarn start
 
 ## Prérequis
 
